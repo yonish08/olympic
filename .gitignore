@@ -5,7 +5,6 @@ __pycache__/
 *.pyc
 media/
 .env
-db.sqlite3
 .venv
 venv/
 windows.requirements.txt
