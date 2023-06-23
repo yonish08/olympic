@@ -2,7 +2,8 @@ from django.urls import path
 from .views import (
     ClientRegisterView,
     UserLoginView,
-    UserLogoutView
+    UserLogoutView,
+    ActivateAccountView
 )
 
 app_name = 'user'
@@ -10,5 +11,6 @@ app_name = 'user'
 urlpatterns = [
     path('', UserLoginView.as_view(), name='login'),
     path('register/', ClientRegisterView.as_view(), name='register'),
+    path('activate/<uidb64>/<token>/', ActivateAccountView.as_view(), name='activate'),
     path('logout/', UserLogoutView.as_view(), name='logout'),
 ]
