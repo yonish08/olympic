@@ -5,7 +5,7 @@ from django.contrib.auth import logout
 from django.views.generic import *
 from django.urls import reverse_lazy
 from user.forms import UsersAuthenticationForm, RegisterForm
-from user.models import Customer, SiteAdmin
+from user.models import Customer
 from django.views.generic.edit import FormView
 from django.contrib.auth import login, authenticate, logout
 

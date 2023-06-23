@@ -15,21 +15,7 @@ class TimeStamp(models.Model):
     def save(self, *args, **kwargs):
         self.update_at = timezone.now()
         return super().save(*args, **kwargs)
-
-
-# site admin model
-class SiteAdmin(TimeStamp):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.user.username
-
-    def save(self, *args, **kwargs):
-        group, group_created = Group.objects.get_or_create(name="siteadmin")
-        self.user.groups.add(group)
-        super().save(*args, **kwargs)
-
+    
 
 # site user model
 class Customer(TimeStamp):
