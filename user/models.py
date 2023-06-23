@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User, Group
 from django_countries.fields import CountryField
@@ -10,7 +7,7 @@ from django_countries.fields import CountryField
 class TimeStamp(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     update_at = models.DateTimeField(auto_now=True)
-    s_active   = models.BooleanField(default=True)
+    is_active   = models.BooleanField(default=True)
 
     class Meta:
         abstract = True
@@ -44,7 +41,7 @@ class Customer(TimeStamp):
     USERNAME_FIELD = 'email'
     
     def getFullName(self):
-        return self.user.first_name + ' ' + self.user.last_name
+        return self.full_name
 
     def save(self, *args, **kwargs):
         group, group_create = Group.objects.get_or_create(name="customer")
