@@ -8,7 +8,7 @@ from user.forms import UsersAuthenticationForm, RegisterForm
 from user.models import Customer
 from django.views.generic.edit import FormView
 from django.contrib.auth import login, authenticate, logout
-# send meail
+# mail verification code
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -95,13 +95,24 @@ class UserLoginView(FormView):
     template_name = "account/login.html"
     form_class = UsersAuthenticationForm
 
+    # def dispatch(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated:
+    #         if request.user.is_superuser:
+    #             return redirect('core:admin-dashboard')
+    #         else:
+    #             return redirect('core:dashboard')
+    #     return super().dispatch(request, *args, **kwargs)
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             if request.user.is_superuser:
                 return redirect('core:admin-dashboard')
             else:
                 return redirect('core:dashboard')
-        return super().dispatch(request, *args, **kwargs)
+        response = super().dispatch(request, *args, **kwargs)
+        response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response["Pragma"] = "no-cache"
+        response["Expires"] = "0"
+        return response
     
     def form_valid(self, form):
         email = form.cleaned_data["email"]
