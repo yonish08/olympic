@@ -1,5 +1,5 @@
 from django import forms
-from core.models import (
+from user.models import (
     Customer,
 )
 from django.contrib.auth.forms import UserCreationForm
