@@ -1,0 +1,12 @@
+*.log
+**/backup-*.zip
+**/migrations/
+__pycache__/
+*.pyc
+media/
+.env
+db.sqlite3
+.venv
+venv/
+windows.requirements.txt
+htsproject/settings.py
