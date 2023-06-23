@@ -21,31 +21,24 @@ class ActivateAccountView(View):
     def get(self, request, uidb64, token):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
-            user = Customer.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, Customer.DoesNotExist):
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
-            user.is_active = True
-            user.active = True
             user.save()
             messages.success(request, "Thank you for your email confirmation. Now you can login to your account.")
         else:
+            print(request)
             messages.error(request, "Activation link is invalid!")
         return redirect(reverse_lazy('user:login'))
     
     
 # send mail
 def sendMail(request, user, to_email):
-    print("************************************************************")
-    print("USER ", user)
-    print("USER OK ", user.pk)
-    print("To mail ", to_email)
-    print("USER full name  ", user.full_name)
-    print("************************************************************")
     mail_subject = "Activate your user account."
     message = render_to_string("account/acc_active_email.html", {
-        'user': user.full_name,
+        'user': user.email,
         'domain': get_current_site(request).domain,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
@@ -53,7 +46,7 @@ def sendMail(request, user, to_email):
     })
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
-        messages.success(request, f'Dear <b>{user.full_name}</b>, please go to you email <b>{to_email}</b> inbox and click on \
+        messages.success(request, f'Dear <b>{user.email}</b>, please go to you email <b>{to_email}</b> inbox and click on \
                 received activation link to confirm and complete the registration.')
     else:
         messages.error(request, f'Problem sending email to {to_email}, check if you typed it correctly.')
@@ -81,6 +74,7 @@ class ClientRegisterView(FormView):
         )
         user.is_active = False
         user.save()
+        sendMail(self.request, user, form.cleaned_data.get('email'))
         
         customer = Customer.objects.create(
             user=user,
@@ -88,8 +82,6 @@ class ClientRegisterView(FormView):
             full_name=form.cleaned_data['full_name'],
             country=form.cleaned_data['country']
         )
-        sendMail(self.request, customer, form.cleaned_data.get('email'))
-
         return super().form_valid(form)
     
     def form_invalid(self, form):
