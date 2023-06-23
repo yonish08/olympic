@@ -4,10 +4,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.views.generic import *
 from django.urls import reverse_lazy
-from user.forms import UsersAuthenticationForm, RegisterForm
+from user.forms import UsersAuthenticationForm, RegisterForm, CustomPasswordChangeForm
 from user.models import Customer
 from django.views.generic.edit import FormView
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.views import PasswordChangeView
 # mail verification code
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -31,7 +32,7 @@ class ActivateAccountView(View):
         else:
             print(request)
             messages.error(request, "Activation link is invalid!")
-        return redirect(reverse_lazy('user:login'))
+        return redirect(reverse_lazy('login'))
     
     
 # send mail
@@ -56,7 +57,7 @@ def sendMail(request, user, to_email):
 class ClientRegisterView(FormView):
     template_name = 'account/register.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('user:login')
+    success_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -139,3 +140,4 @@ class UserLogoutView(View):
             logout(request)
             messages.success(self.request, "Logged out successfully.")
             return redirect('/')
+        

@@ -2,7 +2,8 @@ from django import forms
 from user.models import (
     Customer,
 )
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.models import User
 
 # user authentication form
 class UsersAuthenticationForm(forms.Form):
@@ -33,3 +34,13 @@ class RegisterForm(UserCreationForm):
             'full_name': forms.TextInput(attrs={'placeholder': 'Enter your full name'}),
             'country': forms.Select(attrs={'placeholder': 'Select country'}),
         }
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter current password'}))
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter new password'}))
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm new password'}))
+
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')
