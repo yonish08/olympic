@@ -1,0 +1,39 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% block title %}
+Fixture
+{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+<div class="fixtures_container wrapper">
+    <div class="breadcrumb">
+        <h1>Fixtures</h1>
+    </div>
+
+    <div class="fixtures_wrapper">
+        <ul style>
+            <li>
+                <span class="team_name">Team 1</span>
+                <span>vs</span>
+                <span class="team_name">Team 2</span>
+            </li>
+            <li>
+                <span class="team_name">Team 3</span>
+                <span>vs</span>
+                <span class="team_name">Team 4</span>
+            </li>
+            <li>
+                <span class="team_name">Team 5</span>
+                <span>vs</span>
+                <span class="team_name">Team 6</span>
+            </li>
+            <li>
+                <span class="team_name">Team 7</span>
+                <span>vs</span>
+                <span class="team_name">Team 8</span>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

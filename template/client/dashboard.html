@@ -1,15 +1,161 @@
 {% extends 'client/base.html' %}
 {% load static %}
 {% block styles %}
-<style>
-    .dashboard_wrapper{
-        height: auto;
-        min-height: 500px;
-    }
-</style>
 {% endblock %}
 {% block content %}
-<div class="dashboard_wrapper wrapper">
-    <h6 class="m-5">This is dashboard</h6>
+<div class="dashboard_body wrapper">
+    <div class="dashboard_body__left">
+        <div class="dashboard_body__box">
+            <div class="dashboard_body__box_header">
+                <h3>Top Headlines</h3>
+            </div>
+            <div class="dashboard_body__box_body">
+                <ul class="">
+                    <li>
+                        Madrid fle hate crime complaint over vinicious abuse
+                    </li>
+                    <li>
+                        Madrid fle hate crime complaint over vinicious abuse
+                    </li>
+                    <li>
+                        Madrid fle hate crime complaint over vinicious abuse
+                    </li>
+                    <li>
+                        Madrid fle hate crime complaint over vinicious abuse
+                    </li>
+                    <li>
+                        Madrid fle hate crime complaint over vinicious abuse
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="dashboard_body__box">
+            <div class="dashboard_body__box_header">
+                <h3>Fallow us on</h3>
+            </div>
+            <div class="dashboard_body__box_body fallow">
+                <ul>
+                    <li>
+                        <i class="fa_icon fa-brands fa-facebook-f"></i>
+                        <i class="fa_icon fa-brands fa-tiktok"></i>
+                        <i class="fa_icon fa-brands fa-instagram"></i>
+                        <i class="fa_icon fa-brands fa-twitter"></i>
+                        <i class="fa_icon fa-brands fa-youtube"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard_body__middle">
+        <div class="live_box">
+            <div class="live_box__header">
+                <p class="text-danger">
+                    <i class="mr-2 fa-solid fa-bars-staggered text-danger"></i>
+                    Live
+                </p>
+                <a href="live.html" class="view_detail">View Live</a>
+            </div>
+            <div class="live_box__body">
+                <p>
+                    <span class="team_name">
+                        Brazil 
+                        &nbsp;&nbsp;  <span>2</span>
+                    </span>
+                    <span>HT</span>
+                    <span class="team_name">
+                        <span>2</span> &nbsp;&nbsp;  
+                        France 
+                    </span>
+                </p>
+
+                <div class="video_wrapper">
+                    <iframe 
+                        class="video"
+                        width="100%" 
+                        height="100%" 
+                        src="https://www.youtube.com/embed/iJELm9w74WQ" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="live_box">
+            <div class="live_box__header">
+                <p class="text-danger">
+                    <i class="mr-2 fa-solid fa-bars-staggered text-danger"></i>
+                    Live
+                </p>
+                <a href="live.html" class="view_detail">View Live</a>
+            </div>
+            <div class="live_box__body">
+                <p>
+                    Gaurika singh almost win another gold
+                </p>
+
+                <div class="video_wrapper">
+                    <iframe 
+                        class="video"
+                        width="100%" 
+                        height="100%" 
+                        src="https://www.youtube.com/embed/JQlbYFbRE6Y" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard_body__right">
+        <div class="dashboard_body__box">
+            <div class="dashboard_body__box_header">
+                <h3>Highlights</h3>
+                <a href="highlights.html">View All</a>
+            </div>
+            <div class="dashboard_body__box_body">
+                <iframe 
+                    width="100%" 
+                    height="250" 
+                    src="https://www.youtube.com/embed/YRbhZYmEbUM" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen 
+                ></iframe>
+            </div>
+        </div>
+        <div class="dashboard_body__box">
+            <div class="dashboard_body__box_header">
+                <h3>Fixtures</h3>
+                <a href="fixtures.html">View All</a>
+            </div>
+            <div class="dashboard_body__box_body fixtures">
+                <ul style>
+                    <li>
+                        <span class="team_name">Team 1</span>
+                        <span>vs</span>
+                        <span class="team_name">Team 2</span>
+                    </li>
+                    <li>
+                        <span class="team_name">Team 3</span>
+                        <span>vs</span>
+                        <span class="team_name">Team 4</span>
+                    </li>
+                    <li>
+                        <span class="team_name">Team 5</span>
+                        <span>vs</span>
+                        <span class="team_name">Team 6</span>
+                    </li>
+                    <li>
+                        <span class="team_name">Team 7</span>
+                        <span>vs</span>
+                        <span class="team_name">Team 8</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% block title %}
+Highlight
+{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+<div class="news_container wrapper">
+    <div class="breadcrumb">
+        <h1>Match Highlight</h1>
+        <form action="">
+            <input type="text" placeholder="Search highlight">
+        </form>
+    </div>
+
+    <div class="news_container__card">
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <iframe 
+                    class="video"
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/iJELm9w74WQ" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="news_wrapper_desc">
+                <h4>Brazil vs France</h4>
+                <p class="date">5 APRIL, 2023 FRIDAY</p>
+            </div>
+        </div>
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <iframe 
+                    class="video"
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/iJELm9w74WQ" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="news_wrapper_desc">
+                <div class="news_wrapper_desc">
+                    <h4>Brazil vs France</h4>
+                    <p class="date">5 APRIL, 2023 FRIDAY</p>
+                </div>
+            </div>
+        </div>
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <iframe 
+                    class="video"
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/iJELm9w74WQ" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="news_wrapper_desc">
+                <div class="news_wrapper_desc">
+                    <h4>Brazil vs France</h4>
+                    <p class="date">5 APRIL, 2023 FRIDAY</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

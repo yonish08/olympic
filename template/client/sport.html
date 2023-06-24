@@ -1,0 +1,44 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% block title %}
+Sport
+{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+<div class="news_container wrapper">
+    <div class="breadcrumb">
+        <h1>Sports</h1>
+        <form action="">
+            <input type="text" placeholder="Search sports">
+        </form>
+    </div>
+
+    <div class="news_container__card">
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <img src="./img/football.PNG" alt="">
+            </div>
+            <div class="news_wrapper_desc">
+                <h4>Football</h4>
+            </div>
+        </div>
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <img src="./img/basketball.PNG" alt="">
+            </div>
+            <div class="news_wrapper_desc">
+                <h4>Basketball</h4>
+            </div>
+        </div>
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <img src="./img/boxing.PNG" alt="">
+            </div>
+            <div class="news_wrapper_desc">
+                <h4>Boxing</h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

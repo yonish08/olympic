@@ -11,19 +11,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="olympics.html">Olympic Games <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'core:about_us' %}">Olympic Games <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="athletes.html">Athletes</a>
+                        <a class="nav-link" href="{% url 'core:player' %}">Player</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="sports.html">Sports</a>
+                        <a class="nav-link" href="{% url 'core:sport' %}">Sports</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="fixtures.html">Fixtures</a>
+                        <a class="nav-link" href="{% url 'core:fixture' %}">Fixtures</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="news.html">News</a>
+                        <a class="nav-link" href="{% url 'core:news' %}">News</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">

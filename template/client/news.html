@@ -1,0 +1,68 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% block title %}
+News
+{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+<div class="news_container wrapper">
+    <div class="breadcrumb">
+        <h1>News</h1>
+        <form action="">
+            <input type="text" placeholder="Search news">
+        </form>
+    </div>
+
+    <div class="news_container__card">
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <img src="./img/news.PNG" alt="">
+            </div>
+            <div class="news_wrapper_desc">
+                <h4>This is news heading</h4>
+                <p class="date">5 APRIL, 2023 FRIDAY</p>
+                <p class="desc">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis voluptates deleniti voluptatibus, facere labore necessitatibus!
+                </p>
+                <a href="newsdetail.html">
+                    Read more
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <img src="./img/news.PNG" alt="">
+            </div>
+            <div class="news_wrapper_desc">
+                <h4>This is news heading</h4>
+                <p class="date">5 APRIL, 2023 FRIDAY</p>
+                <p class="desc">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis voluptates deleniti voluptatibus, facere labore necessitatibus!
+                </p>
+                <a href="newsdetail.html">
+                    Read more
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="news_wrapper">
+            <div class="news_wrapper_img">
+                <img src="./img/news.PNG" alt="">
+            </div>
+            <div class="news_wrapper_desc">
+                <h4>This is news heading</h4>
+                <p class="date">5 APRIL, 2023 FRIDAY</p>
+                <p class="desc">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis voluptates deleniti voluptatibus, facere labore necessitatibus!
+                </p>
+                <a href="newsdetail.html">
+                    Read more
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
