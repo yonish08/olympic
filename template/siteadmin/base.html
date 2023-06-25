@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" media="screen" href="{% static 'admin/css/style.css' %}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'admin/css/main.css' %}" />
         <script src="{% static 'admin/js/perfect-scrollbar.min.js' %}"></script>
     </head>
 
@@ -38,9 +39,6 @@
                     <!-- end breadcrumb content section -->
 
                     {% block content %}
-                    <div style="height: auto; min-height: 700px;" class="ng-danger">
-
-                    </div>
                     {% endblock content %}
 
                     <!-- start footer section -->

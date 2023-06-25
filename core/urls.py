@@ -1,22 +1,21 @@
 from django.urls import path
-from .views import (
-    AdminDashboardView,
-    # client views
-    DashboardView,
-    AboutusView,
-    FixtureView,
-    HightlightView,
-    LiveView,
-    NewsView,
-    NewsDetailView,
-    PlayerView,
-    SportView
-)
+from .views import *
 
 app_name = 'core'
 
 urlpatterns = [
     path('admin-dashboard/', AdminDashboardView.as_view(), name='admin-dashboard'),
+    path('admin-about-us/', AdminAboutusView.as_view(), name='admin_about_us'),
+    path('admin-sports/', AdminSportsView.as_view(), name='admin_sports'),
+    path('admin-news/', AdminNewsView.as_view(), name='admin_news'),
+    path('admin-country/', AdminCountryView.as_view(), name='admin_country'),
+    path('admin-standing/', AdminStandingView.as_view(), name='admin_standing'),
+    path('admin-player/', AdminPlayerView.as_view(), name='admin_player'),
+    path('admin-live/', AdminLiveView.as_view(), name='admin_live'),
+    path('admin-highlight/', AdminHighlightView.as_view(), name='admin_highlight'),
+    path('admin-fixture/', AdminFixturetView.as_view(), name='admin_fixture'),
+
+
     # client views
     path('', DashboardView.as_view(), name='dashboard'),
     path('about-us', AboutusView.as_view(), name='about_us'),
