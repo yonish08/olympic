@@ -1,8 +1,32 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import *
-from user.models import Customer
 from core.mixins import UserRequiredMixin, AdminRequiredMixin
+from user.models import Customer
+from core.models import *
+from core.forms import *
+# from core.forms import (
+#     AboutFunOlympicForm,
+#     NewsForm,
+#     CountryForm,
+#     StandingForm,
+#     SportForm,
+#     PlayerForm,
+#     HighlightForm,
+#     LiveMatchForm,
+#     FixtureForm
+# )
+# from core.models import (
+#     AboutFunOlympic,
+#     News,
+#     Country,
+#     Standing,
+#     Sport,
+#     Player,
+#     Highlight,
+#     LiveMatch,
+#     Fixture
+# )
 
 
 # Create your views here.
