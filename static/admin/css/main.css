@@ -1,4 +1,27 @@
-.component_wrapper {
-    height: auto;
-    min-height: 500px;
+.card-comment{
+    padding: 0px !important;
+}
+
+.modal_close{
+    outline: none !important;
+}
+
+.btn_circle{
+    border-radius: 50% !important;
+    width: 23px;
+    height: 23px;
+    color: white !important;
+}
+.breadcrumb-item{
+    a{
+        color: #6c757d !important;
+    }
+}
+.card-body{
+    padding: 15px !important;
+}
+
+.card-body img{
+    min-height: 153px;
+    max-height: 153px;
 }

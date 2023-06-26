@@ -6,7 +6,12 @@ app_name = 'core'
 urlpatterns = [
     path('admin-dashboard/', AdminDashboardView.as_view(), name='admin-dashboard'),
     path('admin-about-us/', AdminAboutusView.as_view(), name='admin_about_us'),
+    # sports CRUD
     path('admin-sports/', AdminSportsView.as_view(), name='admin_sports'),
+    path('admin-sport-create', AdminSportsCreateView.as_view(), name='admin_sport_create'),
+    path('admin-sport-update/<int:pk>/', AdminSportsUpdateView.as_view(), name='admin_sport_update'),
+    path('admin-sport-delete/<int:pk>/', AdminSportsDeleteView.as_view(), name='admin_sport_delete'),
+    # news CRUD
     path('admin-news/', AdminNewsView.as_view(), name='admin_news'),
     path('admin-country/', AdminCountryView.as_view(), name='admin_country'),
     path('admin-standing/', AdminStandingView.as_view(), name='admin_standing'),

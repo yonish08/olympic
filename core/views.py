@@ -3,30 +3,9 @@ from django.contrib import messages
 from django.views.generic import *
 from core.mixins import UserRequiredMixin, AdminRequiredMixin
 from user.models import Customer
+from django.urls import reverse_lazy, reverse
 from core.models import *
 from core.forms import *
-# from core.forms import (
-#     AboutFunOlympicForm,
-#     NewsForm,
-#     CountryForm,
-#     StandingForm,
-#     SportForm,
-#     PlayerForm,
-#     HighlightForm,
-#     LiveMatchForm,
-#     FixtureForm
-# )
-# from core.models import (
-#     AboutFunOlympic,
-#     News,
-#     Country,
-#     Standing,
-#     Sport,
-#     Player,
-#     Highlight,
-#     LiveMatch,
-#     Fixture
-# )
 
 
 # Create your views here.
@@ -36,17 +15,97 @@ class AdminDashboardView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/base.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
+
+
+# About us CRUD
 class AdminAboutusView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/aboutus.html'
     login_url = 'user:login'
 
 
+class AdminAboutusCreateView(AdminRequiredMixin, CreateView):
+    template_name  = 'siteadmin/member_create.html'
+    form_class = AboutFunOlympicForm
+    success_url = reverse_lazy('core:admin_about_us')
+    success_message = "About us created successfully!"
+
+    def get_success_message(self, cleaned_data):
+        title = cleaned_data['title']
+        return title + self.success_message
+
+
+class AboustUsUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = "admintemplate/aboutus_update.html"
+    model = AboutFunOlympic
+    form_class = AboutFunOlympicForm
+    success_url = reverse_lazy('core:admin_about_us')
+    success_message = " updated successfully!"
+    
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+    def get_success_message(self, cleaned_data):
+        title = cleaned_data['title']
+        return title + self.success_message
+
+
+
+# SPORTS CRUD
 class AdminSportsView(AdminRequiredMixin, TemplateView):
-    template_name = 'siteadmin/sports.html'
+    template_name = 'siteadmin/sport.html'
     login_url = 'user:login'
 
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sport'] = Sport.objects.all()
+        return context
+
+
+class AdminSportsCreateView(AdminRequiredMixin, CreateView):
+    template_name  = 'siteadmin/sportcreate.html'
+    form_class = SportForm
+    success_url = reverse_lazy('core:admin_sports')
+    success_message = " sport created successfully!"
+
+    def get_success_message(self, cleaned_data):
+        title = cleaned_data['title']
+        return title + self.success_message
+    
+
+class AdminSportsUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = "siteadmin/sportupdate.html"
+    model = Sport
+    form_class = SportForm
+    success_url = reverse_lazy('core:admin_sports')
+    success_message = " sport updated successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def get_success_message(self, cleaned_data):
+        messages.success(self.request,  self.success_message)
+        return self.success_message
+    
+
+class AdminSportsDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/sportdelete.html"
+    model = Sport
+    success_url = reverse_lazy('core:admin_sports')
+    success_message = " sport deleted successfully!"
+    
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(self.request, self.object.title + self.success_message)
+        return super(AdminSportsDeleteView, self).delete(request, *args, **kwargs)
+
+
+
+# NEWS CRUD
 class AdminNewsView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/news.html'
     login_url = 'user:login'
