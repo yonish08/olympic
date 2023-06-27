@@ -6,6 +6,8 @@ from user.models import Customer
 from django.urls import reverse_lazy, reverse
 from core.models import *
 from core.forms import *
+from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage
 
 
 # Create your views here.
@@ -59,10 +61,13 @@ class AdminSportsView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/sport.html'
     login_url = 'user:login'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['sport'] = Sport.objects.all()
+        sportList = Sport.objects.all().order_by('-created_at')
+        paginator      = Paginator(sportList, 12) 
+        page_number    = self.request.GET.get('page')
+        page_obj       = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
         return context
 
 
@@ -199,6 +204,32 @@ class PlayerView(UserRequiredMixin, TemplateView):
 class SportView(UserRequiredMixin, TemplateView):
     template_name = 'client/sport.html'
     login_url = 'user:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sport'] = Sport.objects.all().order_by('-created_at')[0:9]
+        return context
+    
+
+# search sport list
+def sportSearchView(request):
+    if request.method == 'GET':
+        if request.GET['search']:        
+            query =  request.GET.get('search')
+            try:
+                program_lookups = Q(title__icontains=query)
+                sport_filter = Sport.objects.filter(program_lookups) 
+                context = {
+                    'sportFilter' : sport_filter,
+                } 
+                return render(request,"client/sportsearch.html",context)
+            except:
+                pass
+            return render(request,"client/sportsearch.html")
+        else:
+            return render(request,"client/sportsearch.html")
+    else:
+        return render(request,"client/sportsearch.html")
 
 
 

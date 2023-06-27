@@ -269,6 +269,27 @@ input {
   }
 }
 
+
+.custom_pagination {
+  border-top: 1px solid #e5e5e5;
+  margin: 0;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.custom_pagination .pagination .page-item{
+  color: #1f1f1f !important;
+}
+.custom_pagination .pagination .page-item.active .page-link{
+  background-color: #1f2937 !important;
+  border: 1px solid #1f2937 !important;
+  color: white !important;
+  outline: none !important;
+}
+.custom_pagination .pagination .page-item.active .page-link:hover{
+  background-color: none !important;
+}
+
 /*
 BASIC COMMON CSS END HERE
 */
@@ -292,7 +313,8 @@ BASIC COMMON CSS END HERE
   justify-content: center;
 
   overflow-y: auto;
-  height: 100%; /* Ensure full height of the left section */
+  height: 100%;
+  /* Ensure full height of the left section */
 }
 
 .login_wrapper .login_wrapper__left h3 {
@@ -844,6 +866,16 @@ NEWS PAGE CSS START
   min-height: 700px;
   margin-top: 48px;
   margin-bottom: 48px;
+}
+
+.search_breadcrumb {
+  width: auto;
+  min-width: 300px;
+}
+
+.search_breadcrumb a{
+  position: absolute;
+  margin-top: -3% !important;
 }
 
 .news_container .news_container__card {

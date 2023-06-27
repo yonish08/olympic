@@ -32,7 +32,28 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    {% block style %}
+    {% block styles %}
+    <style>
+        .custom_pagination {
+            border-top: 1px solid #e5e5e5;
+            margin: 0;
+            padding-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        .custom_pagination .pagination .page-item{
+            color: #1f1f1f !important;
+        }
+        .custom_pagination .pagination .page-item.active .page-link{
+            background-color: #1f2937 !important;
+            border: 1px solid #1f2937 !important;
+            color: white !important;
+            outline: none !important;
+        }
+        .custom_pagination .pagination .page-item.active .page-link:hover{
+            background-color: none !important;
+        }
+    </style>
     {% endblock %}
 </head>
 

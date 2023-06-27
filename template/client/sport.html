@@ -9,36 +9,30 @@ Sport
 <div class="news_container wrapper">
     <div class="breadcrumb">
         <h1>Sports</h1>
-        <form action="">
-            <input type="text" placeholder="Search sports">
+        <form action="{% url 'core:search' %}">
+            <input type="text" placeholder="Search sports" name="search">
+            <button class="button" type="submit" hidden></button>
         </form>
     </div>
 
     <div class="news_container__card">
+        {% if sport %}
+        {% for data in sport %}
         <div class="news_wrapper">
             <div class="news_wrapper_img">
-                <img src="./img/football.PNG" alt="">
+                {% if data.display_image %}
+                <img class="img-fluid" src="{{data.display_image.url}}"
+                    alt="{{data.title}}">
+                {% endif %}
             </div>
             <div class="news_wrapper_desc">
-                <h4>Football</h4>
+                <h4>{{data.title}}</h4>
             </div>
         </div>
-        <div class="news_wrapper">
-            <div class="news_wrapper_img">
-                <img src="./img/basketball.PNG" alt="">
-            </div>
-            <div class="news_wrapper_desc">
-                <h4>Basketball</h4>
-            </div>
-        </div>
-        <div class="news_wrapper">
-            <div class="news_wrapper_img">
-                <img src="./img/boxing.PNG" alt="">
-            </div>
-            <div class="news_wrapper_desc">
-                <h4>Boxing</h4>
-            </div>
-        </div>
+        {% endfor %}
+        {% else %}
+        <p>No results found</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

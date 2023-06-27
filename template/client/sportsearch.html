@@ -1,0 +1,43 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% block title %}
+Sport
+{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+<div class="news_container wrapper">
+    <div class="breadcrumb">
+        <div class="search_breadcrumb">
+            <h1 style="font-style: italic;">
+                Result
+            </h1>
+            <a href="{% url 'core:sport'%}" class="text-dark"><-- Back</a>
+        </div>
+        <form action="{% url 'core:search' %}">
+            <input type="text" placeholder="Search sports" name="search">
+            <button class="button" type="submit" hidden></button>
+        </form>
+    </div>
+
+    <div class="news_container__card">
+        {% if sportFilter %}
+            {% for data in sportFilter %}
+                <div class="news_wrapper">
+                    <div class="news_wrapper_img">
+                        {% if data.display_image %}
+                        <img class="img-fluid" src="{{data.display_image.url}}"
+                            alt="{{data.title}}">
+                        {% endif %}
+                    </div>
+                    <div class="news_wrapper_desc">
+                        <h4>{{data.title}}</h4>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+                <p>No results found</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

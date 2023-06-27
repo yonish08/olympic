@@ -31,4 +31,6 @@ urlpatterns = [
     path('news-detail', NewsDetailView.as_view(), name='news_detail'),
     path('player', PlayerView.as_view(), name='player'),
     path('sport', SportView.as_view(), name='sport'),
+    # Search
+    path('search/', sportSearchView, name='search'),
 ]

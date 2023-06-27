@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Olympic | 
+            Olympic |
             {% block title %}
             Home
             {% endblock %}
@@ -29,7 +29,8 @@
             rel="stylesheet">
 
         <!-- font awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
         <!-- style block -->
         {% block styles %}
         <style>
@@ -46,6 +47,25 @@
                 top: 0;
                 width: 100%;
             }
+            .custom_pagination {
+                border-top: 1px solid #e5e5e5;
+                margin: 0;
+                padding-top: 30px;
+                display: flex;
+                justify-content: center;
+            }
+            .custom_pagination .pagination .page-item{
+                color: #1f1f1f !important;
+            }
+            .custom_pagination .pagination .page-item.active .page-link{
+                background-color: #1f2937 !important;
+                border: 1px solid #1f2937 !important;
+                color: white !important;
+                outline: none !important;
+            }
+            .custom_pagination .pagination .page-item.active .page-link:hover{
+                background-color: none !important;
+            }
         </style>
         {% endblock %}
     </head>
@@ -56,31 +76,35 @@
             {% include 'client/header.html' %}
 
             {% if messages %}
-                {% for message in messages %}
-                <div class="show_message">
-                    {% if message.tags == 'success' %}
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ message|safe|escape }}
-                    </div>
-                {% elif message.tags == 'error' %}
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ message|safe|escape }}
-                    </div>
-                {% elif message.tags == 'info' %}
-                    <div class="alert alert-info alert-dismissible" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ message|safe|escape }}
-                    </div>
-                {% elif message.tags == 'warning' %}
-                    <div class="alert alert-warning alert-dismissible" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ message|safe|escape }}
-                    </div>
-                {% endif %}
+            {% for message in messages %}
+            <div class="show_message">
+                {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <a href="#" class="close" data-dismiss="alert"
+                        aria-label="close">&times;</a>
+                    {{ message|safe|escape }}
                 </div>
-                {% endfor %}
+                {% elif message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <a href="#" class="close" data-dismiss="alert"
+                        aria-label="close">&times;</a>
+                    {{ message|safe|escape }}
+                </div>
+                {% elif message.tags == 'info' %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    <a href="#" class="close" data-dismiss="alert"
+                        aria-label="close">&times;</a>
+                    {{ message|safe|escape }}
+                </div>
+                {% elif message.tags == 'warning' %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <a href="#" class="close" data-dismiss="alert"
+                        aria-label="close">&times;</a>
+                    {{ message|safe|escape }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
             {% endif %}
 
             <!--  content block-->
