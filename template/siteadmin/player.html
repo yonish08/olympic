@@ -1,12 +1,93 @@
 {% extends 'siteadmin/base.html' %}
 {% load static %}
-{% block title %}
-Player
-{% endblock %}
-{% block styles %}
-{% endblock %}
 {% block content %}
-<div class="component_wrapper">
-    <h1>Player page</h1>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0 text-dark">
+                        Player
+                        <a href="{% url 'core:admin_player_create' %}" class="btn btn-success btn-xs btn_circle">
+                            <i class="fa fa-plus text-light" aria-hidden="true"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'core:admin_player' %}" class="text-dark">Player</a></li>
+                        <li class="breadcrumb-item active">list</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid pb-4">
+            <br>
+            {% if page_obj %}
+            <div class="row d-flex align-items-stretch">
+                {% for data in page_obj %}
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="card card-widget">
+                        <div class="card-body card_body">
+                            {% if data.image %}
+                            <img class="img-fluid" src="{{data.image.url}}" alt="{{data.name}}">
+                            {% endif %}
+                            <div class="mt-2">
+                                <h5>{{data.name}}</h5>
+                                <p style="padding: 0; margin: 0; color: #b8b7b7;" >{{data.sport_category}}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer card-comments">
+                            <div class="card-comment">
+                                <a href="{% url 'core:admin_player_delete' data.id %}" class="btn btn-danger btn-xs"
+                                    data-remote="{% url 'core:admin_player_delete' data.id %}" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    <i class="fas fa-trash fa-sm"></i>
+                                </a>
+                                <a href="{% url 'core:admin_player_update' data.id %}" class="btn btn-xs btn-success">
+                                    <i class="fas fa-edit fa-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>Not Data Available</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="custom_pagination mt-4">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{page_obj.previous_page_number}}"
+                        class="page-link"
+                        aria-label="Previous">
+                        <span aria-hidden="true">
+                            Previous
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="page-item active"><a href="?page={{page_obj.number}}"
+                        class="page-link">1</a>
+                </li>
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a href="?page={{page_obj.next_page_number}}" class="page-link"
+                        aria-label="Next">
+                        <span aria-hidden="true">
+                            Next
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </section>
 </div>
 {% endblock %}

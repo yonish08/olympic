@@ -41,9 +41,11 @@ class NewsForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'title': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter title',
             }),
             'content': SummernoteWidget(attrs={
+                'class': 'form-control',
 				'summernote': {
 					'class': 'w-100',
 					'placeholder': 'News description',
@@ -51,7 +53,7 @@ class NewsForm(forms.ModelForm):
                     }
 			}),
             'featured': forms.CheckboxInput(attrs={
-                # 'class': 'form-control',
+                'class': 'form-control',
             }),
             'image': forms.ClearableFileInput(attrs={
                 'class': 'form-control',
@@ -111,16 +113,24 @@ class PlayerForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'sport_category': forms.Select(attrs={
+                'class': 'form-control',
                 'placeholder': 'Select category',
             }),
             'name': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter name',
             }),
             'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Select image',
             }),
-            'user': forms.TextInput(attrs={
-                'placeholder': 'Select user',
+            'standing': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Select standing rank',
+            }),
+            'country': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Select country',
             })
         } 
 

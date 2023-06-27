@@ -9,7 +9,12 @@ Player
 <div class="atheletes_wrapper wrapper">
 
     <div class="breadcrumb">
-        <h1>athletes</h1>
+        <div class="search_breadcrumb">
+            <h1 style="font-style: italic;">
+                Player
+            </h1>
+            <a href="{% url 'core:player'%}" class="text-dark"><-- Back</a>
+        </div>
         <form action="{% url 'core:player_search' %}">
             <input type="text" placeholder="Search player" name="search">
             <button class="button" type="submit" hidden></button>
@@ -17,8 +22,8 @@ Player
     </div>
 
     <div class="row atheletes_container">
-        {% if player %}
-        {% for data in player%}
+        {% if playerFilter %}
+        {% for data in playerFilter%}
         <div class="col-lg-2 col-md-2 col-sm-3 atheletes_wrapper__card">
             <div class="atheletes_wrapper_image_wrapper">
                 {% if data.image %}

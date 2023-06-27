@@ -109,7 +109,8 @@ class Player(TimeStamp):
     sport_category  = models.ForeignKey(Sport, on_delete=models.CASCADE,null=True, blank=True)
     name            = models.CharField(max_length=200)
     image           = models.ImageField(upload_to='pics/player',null=True, blank=True)
-    user            = models.OneToOneField(User, on_delete=models.CASCADE)
+    standing        = models.OneToOneField(Standing, null=True, blank=True, on_delete=models.CASCADE)
+    country         = models.OneToOneField(Country, blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Player"

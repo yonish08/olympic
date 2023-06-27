@@ -126,6 +126,64 @@ class AdminNewsView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/news.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        newsList = News.objects.all().order_by('-created_at')
+        paginator      = Paginator(newsList, 12) 
+        page_number    = self.request.GET.get('page')
+        page_obj       = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        return context
+    
+
+class AdminNewsCreateView(AdminRequiredMixin, CreateView):
+    template_name  = 'siteadmin/newscreate.html'
+    form_class = NewsForm
+    success_url = reverse_lazy('core:admin_news')
+    success_message = "News created successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminNewsUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = "siteadmin/newsupdate.html"
+    model = News
+    form_class = NewsForm
+    success_url = reverse_lazy('core:admin_news')
+    success_message = "News updated successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminNewsDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/newsdelete.html"
+    model = Sport
+    success_url = reverse_lazy('core:admin_news')
+    success_message = "News deleted successfully!"
+    
+    def form_valid(self, form):
+        self.object = self.get_object()
+        messages.success(self.request, self.object.title + ' ' + self.success_message)
+        return super().form_valid(form)
+
 
 class AdminCountryView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/country.html'
@@ -137,9 +195,68 @@ class AdminStandingView(AdminRequiredMixin, TemplateView):
     login_url = 'user:login'
 
 
+# Player CRUD
 class AdminPlayerView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/player.html'
     login_url = 'user:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        playerList = Player.objects.all().order_by('-created_at')
+        paginator      = Paginator(playerList, 12) 
+        page_number    = self.request.GET.get('page')
+        page_obj       = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        return context
+    
+
+class AdminPlayerCreateView(AdminRequiredMixin, CreateView):
+    template_name  = 'siteadmin/playercreate.html'
+    form_class = PlayerForm
+    success_url = reverse_lazy('core:admin_player')
+    success_message = "Player added successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminPlayerUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = "siteadmin/playerupdate.html"
+    model = Player
+    form_class = PlayerForm
+    success_url = reverse_lazy('core:admin_player')
+    success_message = "Player data updated successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminPlayerDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/playerdelete.html"
+    model = Player
+    success_url = reverse_lazy('core:admin_player')
+    success_message = " player deleted successfully!"
+    
+    def form_valid(self, form):
+        self.object = self.get_object()
+        messages.success(self.request, self.object.name + ' ' + self.success_message)
+        return super().form_valid(form)
 
 
 class AdminLiveView(AdminRequiredMixin, TemplateView):
@@ -200,6 +317,33 @@ class PlayerView(UserRequiredMixin, TemplateView):
     template_name = 'client/player.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['player'] = Player.objects.all().order_by('-created_at')[0:36]
+        return context
+    
+    
+# search player
+def playerSearchView(request):
+    if request.method == 'GET':
+        print("Player search")
+        if request.GET['search']:        
+            query =  request.GET.get('search')
+            try:
+                player_lookups = Q(name__icontains=query)
+                player_filters = Player.objects.filter(player_lookups) 
+                context = {
+                    'playerFilter' : player_filters,
+                } 
+                return render(request,"client/playersearch.html",context)
+            except:
+                pass
+            return render(request,"client/playersearch.html")
+        else:
+            return render(request,"client/playersearch.html")
+    else:
+        return render(request,"client/playersearch.html")
+
 
 class SportView(UserRequiredMixin, TemplateView):
     template_name = 'client/sport.html'
@@ -207,11 +351,11 @@ class SportView(UserRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['sport'] = Sport.objects.all().order_by('-created_at')[0:9]
+        context['sport'] = Sport.objects.all().order_by('-created_at')[0:21]
         return context
     
 
-# search sport list
+# search sport
 def sportSearchView(request):
     if request.method == 'GET':
         if request.GET['search']:        
