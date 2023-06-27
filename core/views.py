@@ -70,38 +70,49 @@ class AdminSportsCreateView(AdminRequiredMixin, CreateView):
     template_name  = 'siteadmin/sportcreate.html'
     form_class = SportForm
     success_url = reverse_lazy('core:admin_sports')
-    success_message = " sport created successfully!"
+    success_message = "Sport created successfully!"
 
-    def get_success_message(self, cleaned_data):
-        title = cleaned_data['title']
-        return title + self.success_message
+    def form_invalid(self, form):
+        return super().form_invalid(form)
     
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
 
 class AdminSportsUpdateView(AdminRequiredMixin, UpdateView):
     template_name = "siteadmin/sportupdate.html"
     model = Sport
     form_class = SportForm
     success_url = reverse_lazy('core:admin_sports')
-    success_message = " sport updated successfully!"
+    success_message = "Sport updated successfully!"
 
     def form_invalid(self, form):
         return super().form_invalid(form)
     
-    def get_success_message(self, cleaned_data):
-        messages.success(self.request,  self.success_message)
-        return self.success_message
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
     
 
 class AdminSportsDeleteView(AdminRequiredMixin, DeleteView):
     template_name = "siteadmin/sportdelete.html"
     model = Sport
     success_url = reverse_lazy('core:admin_sports')
-    success_message = " sport deleted successfully!"
+    success_message = "Sport deleted successfully!"
     
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         self.object = self.get_object()
-        messages.success(self.request, self.object.title + self.success_message)
-        return super(AdminSportsDeleteView, self).delete(request, *args, **kwargs)
+        messages.success(self.request, self.object.title + ' ' + self.success_message)
+        return super().form_valid(form)
 
 
 

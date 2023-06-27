@@ -37,8 +37,8 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
 
+    <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -201,7 +201,7 @@
 
 
     <!-- jQuery -->
-    <script src="{% static 'admin/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{% static 'admin/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -269,16 +269,51 @@
     <!-- message -->
     {% if messages %}
     {% for message in messages %}
-        <script>
-            $(document).ready(function () {
-                $(document).Toasts('create', {
-                    class: 'bg-success py-3',
-                    title: '{{ message }}',
-                    autohide: true,
-                    delay: 3000
+        {% if message.tags == 'success' %}
+            <script>
+                $(document).ready(function () {
+                    $(document).Toasts('create', {
+                        class: 'bg-success py-3',
+                        title: '{{ message }}',
+                        autohide: true,
+                        delay: 3000
+                    });
                 });
-            });
+            </script>
+        {% elif message.tags == 'error' %}
+            <script>
+                $(document).ready(function () {
+                    $(document).Toasts('create', {
+                        class: 'bg-danger py-3',
+                        title: '{{ message }}',
+                        autohide: true,
+                        delay: 3000
+                    });
+                });
         </script>
+        {% elif message.tags == 'info' %}
+            <script>
+                $(document).ready(function () {
+                    $(document).Toasts('create', {
+                        class: 'bg-info py-3',
+                        title: '{{ message }}',
+                        autohide: true,
+                        delay: 3000
+                    });
+                });
+            </script>
+        {% elif message.tags == 'warning' %}
+            <script>
+                $(document).ready(function () {
+                    $(document).Toasts('create', {
+                        class: 'bg-warning py-3',
+                        title: '{{ message }}',
+                        autohide: true,
+                        delay: 3000
+                    });
+                });
+            </script>
+        {% endif %}
     {% endfor %}
 {% endif %}
 </body>

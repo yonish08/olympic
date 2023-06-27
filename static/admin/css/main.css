@@ -24,4 +24,6 @@
 .card-body img{
     min-height: 153px;
     max-height: 153px;
+    width: 100% !important;
+    object-fit: cover !important;
 }
