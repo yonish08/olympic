@@ -7,11 +7,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h4 class="m-0 text-dark">Player</h4>
+                    <h4 class="m-0 text-dark">Country</h4>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{% url 'core:admin_player' %}" class="text-dark">Player</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'core:admin_country' %}" class="text-dark">Country</a></li>
                         <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>
@@ -24,24 +24,8 @@
                 {% csrf_token %}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Name <span class="text-danger">*</span></label>
-                        {{form.name}}
-                    </div>
-                    <div class="form-group">
-                        <label>Sport category <span class="text-danger">*</span></label>
-                        {{form.sport_category}}
-                    </div>
-                    <div class="form-group">
-                        <label>Standing <span class="text-danger">*</span></label>
-                        {{form.standing}}
-                    </div>
-                    <div class="form-group">
                         <label>Country <span class="text-danger">*</span></label>
-                        {{form.country.name}}
-                    </div>
-                    <div class="form-group">
-                        <label>Photo <span class="text-danger">*</span></label>
-                        {{form.image}}
+                        {{form.country}}
                     </div>
                 </div>
                 <div class="modal-footer">

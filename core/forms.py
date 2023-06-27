@@ -69,6 +69,7 @@ class CountryForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'country': forms.Select(attrs={
+                'class': 'form-control',
                 'placeholder': 'Select country',
             }),
         } 

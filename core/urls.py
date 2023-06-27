@@ -16,7 +16,12 @@ urlpatterns = [
     path('admin-news-create', AdminNewsCreateView.as_view(), name='admin_news_create'),
     path('admin-news-update/<int:pk>/', AdminNewsUpdateView.as_view(), name='admin_news_update'),
     path('admin-news-delete/<int:pk>/', AdminNewsDeleteView.as_view(), name='admin_news_delete'),
+        # Country CRUD
     path('admin-country/', AdminCountryView.as_view(), name='admin_country'),
+    path('admin-country-create', AdminCountryCreateView.as_view(), name='admin_country_create'),
+    path('admin-country-update/<int:pk>/', AdminCountryUpdateView.as_view(), name='admin_country_update'),
+    path('admin-country-delete/<int:pk>/', AdminCountryDeleteView.as_view(), name='admin_country_delete'),
+
     path('admin-standing/', AdminStandingView.as_view(), name='admin_standing'),
     # player CRUD
     path('admin-player/', AdminPlayerView.as_view(), name='admin_player'),
