@@ -83,6 +83,7 @@ class StandingForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'title': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter title',
             }),
         } 
@@ -173,12 +174,15 @@ class LiveMatchForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'sport_category': forms.Select(attrs={
+                'class': 'form-control',
                 'placeholder': 'Select category',
             }),
             'title': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter title',
             }),
             'description': SummernoteWidget(attrs={
+                'class': 'form-control',
 				'summernote': {
 					'class': 'w-100',
 					'placeholder': 'News description',
@@ -186,12 +190,15 @@ class LiveMatchForm(forms.ModelForm):
                     }
 			}),
             'video_url': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter video url',
             }),
             'venue_name': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter venue name',
             }),
             'country': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Select country',
             })
         } 

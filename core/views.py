@@ -249,9 +249,68 @@ class AdminCountryDeleteView(AdminRequiredMixin, DeleteView):
         return super().form_valid(form)
 
 
+# Standing CRUD
 class AdminStandingView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/standing.html'
     login_url = 'user:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        countryList = Standing.objects.all().order_by('-created_at')
+        paginator      = Paginator(countryList, 10) 
+        page_number    = self.request.GET.get('page')
+        page_obj       = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        return context
+    
+
+class AdminStandingCreateView(AdminRequiredMixin, CreateView):
+    template_name  = 'siteadmin/standingcreate.html'
+    form_class = StandingForm
+    success_url = reverse_lazy('core:admin_standing')
+    success_message = "Standing created successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminStandingUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = "siteadmin/standingupdate.html"
+    model = Standing
+    form_class = StandingForm
+    success_url = reverse_lazy('core:admin_standing')
+    success_message = "Standing updated successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminStandingDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/standingdelete.html"
+    model = Standing
+    success_url = reverse_lazy('core:admin_standing')
+    success_message = " standing deleted successfully!"
+    
+    def form_valid(self, form):
+        self.object = self.get_object()
+        messages.success(self.request, self.object.title + ' ' + self.success_message)
+        return super().form_valid(form)
 
 
 # Player CRUD
@@ -318,11 +377,71 @@ class AdminPlayerDeleteView(AdminRequiredMixin, DeleteView):
         return super().form_valid(form)
 
 
+# Live CRUD
 class AdminLiveView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/live.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        playerList = LiveMatch.objects.all().order_by('-created_at')
+        paginator      = Paginator(playerList, 12) 
+        page_number    = self.request.GET.get('page')
+        page_obj       = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        return context
+    
 
+class AdminLiveCreateView(AdminRequiredMixin, CreateView):
+    template_name  = 'siteadmin/livecreate.html'
+    form_class = LiveMatchForm
+    success_url = reverse_lazy('core:admin_live')
+    success_message = "Live match added successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminLiveUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = "siteadmin/liveupdate.html"
+    model = Player
+    form_class = PlayerForm
+    success_url = reverse_lazy('core:admin_live')
+    success_message = "Live match updated successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminPlayerDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/livedelete.html"
+    model = Player
+    success_url = reverse_lazy('core:admin_live')
+    success_message = " player deleted successfully!"
+    
+    def form_valid(self, form):
+        self.object = self.get_object()
+        messages.success(self.request, self.title + ' ' + self.success_message)
+        return super().form_valid(form)
+
+
+# Highlight live
 class AdminHighlightView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/highlight.html'
     login_url = 'user:login'

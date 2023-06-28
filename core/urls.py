@@ -16,19 +16,27 @@ urlpatterns = [
     path('admin-news-create', AdminNewsCreateView.as_view(), name='admin_news_create'),
     path('admin-news-update/<int:pk>/', AdminNewsUpdateView.as_view(), name='admin_news_update'),
     path('admin-news-delete/<int:pk>/', AdminNewsDeleteView.as_view(), name='admin_news_delete'),
-        # Country CRUD
+    # Country CRUD
     path('admin-country/', AdminCountryView.as_view(), name='admin_country'),
     path('admin-country-create', AdminCountryCreateView.as_view(), name='admin_country_create'),
     path('admin-country-update/<int:pk>/', AdminCountryUpdateView.as_view(), name='admin_country_update'),
     path('admin-country-delete/<int:pk>/', AdminCountryDeleteView.as_view(), name='admin_country_delete'),
-
+    # standing CRUD
     path('admin-standing/', AdminStandingView.as_view(), name='admin_standing'),
+    path('admin-standing-create', AdminStandingCreateView.as_view(), name='admin_standing_create'),
+    path('admin-standing-update/<int:pk>/', AdminStandingUpdateView.as_view(), name='admin_standing_update'),
+    path('admin-standing-delete/<int:pk>/', AdminStandingDeleteView.as_view(), name='admin_standing_delete'),
     # player CRUD
     path('admin-player/', AdminPlayerView.as_view(), name='admin_player'),
     path('admin-player-create', AdminPlayerCreateView.as_view(), name='admin_player_create'),
     path('admin-player-update/<int:pk>/', AdminPlayerUpdateView.as_view(), name='admin_player_update'),
     path('admin-player-delete/<int:pk>/', AdminPlayerDeleteView.as_view(), name='admin_player_delete'),
+    # Live CRUD
     path('admin-live/', AdminLiveView.as_view(), name='admin_live'),
+    path('admin-live-create', AdminLiveCreateView.as_view(), name='admin_live_create'),
+    path('admin-live-update/<int:pk>/', AdminLiveUpdateView.as_view(), name='admin_live_update'),
+    path('admin-live-delete/<int:pk>/', AdminLiveUpdateView.as_view(), name='admin_live_delete'),
+
     path('admin-highlight/', AdminHighlightView.as_view(), name='admin_highlight'),
     path('admin-fixture/', AdminFixturetView.as_view(), name='admin_fixture'),
 
