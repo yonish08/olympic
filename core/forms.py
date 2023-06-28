@@ -216,19 +216,24 @@ class FixtureForm(forms.ModelForm):
         model = Fixture
         fields = '__all__'
         widgets = {
-            'sport_category': forms.Select(attrs={
-                'placeholder': 'Select category',
-            }),
             'first_participant': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter first participant name',
             }),
-            'date': forms.DateInput(attrs={
-                'placeholder': 'Select date',
-            }),
             'second_participant': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter second participant name',
             }),
-            'country': forms.TextInput(attrs={
-                'placeholder': 'Select country',
-            })
+            'date': forms.DateInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'YYYY-MM-DD',
+            }),
+            'sport_category': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Select category',
+            }),
+            'venue_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter venue name',
+            }),
         } 

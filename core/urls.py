@@ -43,6 +43,9 @@ urlpatterns = [
     path('admin-highlight-delete/<int:pk>/', AdminHighlightDeleteView.as_view(), name='admin_highlight_delete'),
     # Fixture CRUD
     path('admin-fixture/', AdminFixturetView.as_view(), name='admin_fixture'),
+    path('admin-fixture-create', AdminFixtureCreateView.as_view(), name='admin_fixture_create'),
+    path('admin-fixture-update/<int:pk>/', AdminFixtureUpdateView.as_view(), name='admin_fixture_update'),
+    path('admin-fixture-delete/<int:pk>/', AdminFixtureDeleteView.as_view(), name='admin_fixture_delete'),
 
 
     # client views

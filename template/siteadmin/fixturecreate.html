@@ -1,0 +1,54 @@
+{% extends 'siteadmin/base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0 text-dark">Fixture</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'core:admin_fixture' %}" class="text-dark">Fixture</a></li>
+                        <li class="breadcrumb-item active">create</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid pb-4">
+            <form action="" method="POST" novalidate enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>First participant <span class="text-danger">*</span></label>
+                        {{form.first_participant}}
+                    </div>
+                    <div class="form-group">
+                        <label>Second participant <span class="text-danger">*</span></label>
+                        {{form.second_participant}}
+                    </div>
+                    <div class="form-group">
+                        <label>Date <span class="text-danger">*</span></label>
+                        {{form.date}}
+                    </div>
+                    <div class="form-group">
+                        <label>Select sport <span class="text-danger">*</span></label>
+                        {{form.sport_category}}
+                    </div>
+                    <div class="form-group">
+                        <label>Venue name <span class="text-danger">*</span></label>
+                        {{form.venue_name}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-success ml-2" type="submit">Submit</button>
+                </div> 
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}

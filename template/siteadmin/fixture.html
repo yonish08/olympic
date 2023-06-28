@@ -1,12 +1,99 @@
 {% extends 'siteadmin/base.html' %}
 {% load static %}
-{% block title %}
-Fixture
-{% endblock %}
-{% block styles %}
-{% endblock %}
 {% block content %}
-<div class="component_wrapper">
-    <h1>Fixture page</h1>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0 text-dark">
+                        Fixture
+                        <a href="{% url 'core:admin_fixture_create' %}" class="btn btn-success btn-xs btn_circle">
+                            <i class="fa fa-plus text-light" aria-hidden="true"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'core:admin_fixture' %}" class="text-dark">Fixture</a></li>
+                        <li class="breadcrumb-item active">list</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid pb-4">
+            <br>
+            {% if page_obj %}
+            <div class="row d-flex align-items-stretch">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Sport </td>
+                            <td>Match</td>
+                            <td>Date</td>
+                            <td>Venue</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in page_obj %}
+                        <tr>
+                            <td>{{data.sport_category}}</td>
+                            <td>
+                                <b>{{data.first_participant}} vs  {{data.second_participant}}</b>
+                            </td>
+                            <td>{{data.date}}</td>
+                            <td>{{data.venue_name}}</td>
+                            <td>
+                                <a href="{% url 'core:admin_fixture_delete' data.id %}" class="btn btn-danger btn-xs"
+                                data-remote="{% url 'core:admin_fixture_delete' data.id %}" data-toggle="modal"
+                                data-target="#exampleModal">
+                                <i class="fas fa-trash fa-sm"></i>
+                            </a>
+                                <a href="{% url 'core:admin_fixture_update' data.id %}" class="btn btn-xs btn-success">
+                                    <i class="fas fa-edit fa-sm"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p>Not Data Available</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="custom_pagination mt-4">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{page_obj.previous_page_number}}"
+                        class="page-link"
+                        aria-label="Previous">
+                        <span aria-hidden="true">
+                            Previous
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="page-item active"><a href="?page={{page_obj.number}}"
+                        class="page-link">1</a>
+                </li>
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a href="?page={{page_obj.next_page_number}}" class="page-link"
+                        aria-label="Next">
+                        <span aria-hidden="true">
+                            Next
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </section>
 </div>
 {% endblock %}

@@ -146,6 +146,6 @@ class LiveMatch(TimeStamp):
 class Fixture(TimeStamp):
     first_participant  = models.CharField(max_length=200,verbose_name='Particant Name')
     second_participant = models.CharField(max_length=200, verbose_name='Particant Name')
-    date               = models.DateField(verbose_name='Game Date')
+    date               = models.DateField(null=True, blank=True, verbose_name='Game Date')
     sport_category     = models.ForeignKey(Sport, on_delete=models.CASCADE,null=True, blank=True)
-    country            = models.ManyToManyField(Country, blank=True, verbose_name="Participating Countries")
+    venue_name     = models.CharField(max_length=255, verbose_name="Venue Name",null=True, blank=True)

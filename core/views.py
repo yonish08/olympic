@@ -505,12 +505,71 @@ class AdminHighlightDeleteView(AdminRequiredMixin, DeleteView):
         return super().form_valid(form)
 
 
+# Fixture CRUD
 class AdminFixturetView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/fixture.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        playerList = Fixture.objects.all().order_by('-created_at')
+        paginator      = Paginator(playerList, 12) 
+        page_number    = self.request.GET.get('page')
+        page_obj       = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        return context
 
 
+class AdminFixtureCreateView(AdminRequiredMixin, CreateView):
+    template_name  = 'siteadmin/fixturecreate.html'
+    form_class = FixtureForm
+    success_url = reverse_lazy('core:admin_fixture')
+    success_message = "Match fixture added successfully!"
+
+    def form_invalid(self, form):
+        print("Form is invalid...............................")
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        print("Form is valid...................................")
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminFixtureUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = "siteadmin/fixtureupdate.html"
+    model = Fixture
+    form_class = FixtureForm
+    success_url = reverse_lazy('core:admin_fixture')
+    success_message = "Match fixture updated successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminFixtureDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/fixturedelete.html"
+    model = Fixture
+    success_url = reverse_lazy('core:admin_fixture')
+    success_message = "Match fixture deleted successfully!"
+    
+    def form_valid(self, form):
+        self.object = self.get_object()
+        messages.success(self.request, self.success_message)
+        return super().form_valid(form)
+    
 
 # CLIENT SITE VIEW
 # dashboard
