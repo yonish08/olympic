@@ -145,12 +145,15 @@ class HighlightForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'sport_category': forms.Select(attrs={
+                'class': 'form-control',
                 'placeholder': 'Select category',
             }),
             'title': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter title',
             }),
             'description': SummernoteWidget(attrs={
+                'class': 'form-control',
 				'summernote': {
 					'class': 'w-100',
 					'placeholder': 'News description',
@@ -158,9 +161,11 @@ class HighlightForm(forms.ModelForm):
                     }
 			}),
             'video': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter video url',
             }),
-            'country': forms.TextInput(attrs={
+            'country': forms.Select(attrs={
+                'class': 'form-control',
                 'placeholder': 'Select country',
             })
         } 

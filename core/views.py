@@ -429,7 +429,7 @@ class AdminLiveUpdateView(AdminRequiredMixin, UpdateView):
         messages.success(self.request, self.success_message)
 
 
-class AdminPlayerDeleteView(AdminRequiredMixin, DeleteView):
+class AdminLiveDeleteView(AdminRequiredMixin, DeleteView):
     template_name = "siteadmin/livedelete.html"
     model = Player
     success_url = reverse_lazy('core:admin_live')
@@ -445,6 +445,64 @@ class AdminPlayerDeleteView(AdminRequiredMixin, DeleteView):
 class AdminHighlightView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/highlight.html'
     login_url = 'user:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        playerList = Highlight.objects.all().order_by('-created_at')
+        paginator      = Paginator(playerList, 12) 
+        page_number    = self.request.GET.get('page')
+        page_obj       = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        return context
+    
+
+class AdminHighlightCreateView(AdminRequiredMixin, CreateView):
+    template_name  = 'siteadmin/highlightcreate.html'
+    form_class = HighlightForm
+    success_url = reverse_lazy('core:admin_highlight')
+    success_message = "Match highlight added successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminHighlightUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = "siteadmin/highlightupdate.html"
+    model = Highlight
+    form_class = HighlightForm
+    success_url = reverse_lazy('core:admin_highlight')
+    success_message = "Match highlight updated successfully!"
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.get_success_message()
+        return response
+
+    def get_success_message(self):
+        messages.success(self.request, self.success_message)
+
+
+class AdminHighlightDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/highlightdelete.html"
+    model = Player
+    success_url = reverse_lazy('core:admin_highlight')
+    success_message = " match highlight deleted successfully!"
+    
+    def form_valid(self, form):
+        self.object = self.get_object()
+        messages.success(self.request, self.title + ' ' + self.success_message)
+        return super().form_valid(form)
 
 
 class AdminFixturetView(AdminRequiredMixin, TemplateView):

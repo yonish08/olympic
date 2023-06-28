@@ -35,9 +35,13 @@ urlpatterns = [
     path('admin-live/', AdminLiveView.as_view(), name='admin_live'),
     path('admin-live-create', AdminLiveCreateView.as_view(), name='admin_live_create'),
     path('admin-live-update/<int:pk>/', AdminLiveUpdateView.as_view(), name='admin_live_update'),
-    path('admin-live-delete/<int:pk>/', AdminLiveUpdateView.as_view(), name='admin_live_delete'),
-
+    path('admin-live-delete/<int:pk>/', AdminLiveDeleteView.as_view(), name='admin_live_delete'),
+    # Highlight CRUD
     path('admin-highlight/', AdminHighlightView.as_view(), name='admin_highlight'),
+    path('admin-highlight-create', AdminHighlightCreateView.as_view(), name='admin_highlight_create'),
+    path('admin-highlight-update/<int:pk>/', AdminHighlightUpdateView.as_view(), name='admin_highlight_update'),
+    path('admin-highlight-delete/<int:pk>/', AdminHighlightDeleteView.as_view(), name='admin_highlight_delete'),
+    # Fixture CRUD
     path('admin-fixture/', AdminFixturetView.as_view(), name='admin_fixture'),
 
 
