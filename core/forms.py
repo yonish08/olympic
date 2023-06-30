@@ -202,7 +202,7 @@ class LiveMatchForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter venue name',
             }),
-            'country': forms.TextInput(attrs={
+            'country': forms.SelectMultiple(attrs={
                 'class': 'form-control',
                 'placeholder': 'Select country',
             })

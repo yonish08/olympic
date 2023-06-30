@@ -412,8 +412,8 @@ class AdminLiveCreateView(AdminRequiredMixin, CreateView):
 
 class AdminLiveUpdateView(AdminRequiredMixin, UpdateView):
     template_name = "siteadmin/liveupdate.html"
-    model = Player
-    form_class = PlayerForm
+    model = LiveMatch
+    form_class = LiveMatchForm
     success_url = reverse_lazy('core:admin_live')
     success_message = "Live match updated successfully!"
 
@@ -431,13 +431,13 @@ class AdminLiveUpdateView(AdminRequiredMixin, UpdateView):
 
 class AdminLiveDeleteView(AdminRequiredMixin, DeleteView):
     template_name = "siteadmin/livedelete.html"
-    model = Player
+    model = LiveMatch
     success_url = reverse_lazy('core:admin_live')
-    success_message = " player deleted successfully!"
+    success_message = "Live match deleted successfully!"
     
     def form_valid(self, form):
         self.object = self.get_object()
-        messages.success(self.request, self.title + ' ' + self.success_message)
+        messages.success(self.request, self.success_message)
         return super().form_valid(form)
 
 
@@ -503,7 +503,7 @@ class AdminHighlightDeleteView(AdminRequiredMixin, DeleteView):
     
     def form_valid(self, form):
         self.object = self.get_object()
-        messages.success(self.request, self.title + ' ' + self.success_message)
+        messages.success(self.request, self.success_message)
         return super().form_valid(form)
 
 

@@ -134,7 +134,7 @@ class LiveMatch(TimeStamp):
     sport_category = models.ForeignKey(Sport, on_delete=models.CASCADE,null=True, blank=True)
     title          = models.CharField(max_length=255)
     description    = models.TextField(null=True, blank=True)
-    video_url      = models.TextField(null=False, blank=False)
+    video_url      = EmbedVideoField(null=False, blank=False)
     venue_name     = models.CharField(max_length=255, verbose_name="Venue Name")
     country        = models.ManyToManyField(Country, blank=True, verbose_name="Participating Countries")
 
