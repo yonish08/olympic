@@ -164,11 +164,11 @@ class HighlightForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter video url',
             }),
-            'country': forms.Select(attrs={
+            'country': forms.SelectMultiple(attrs={
                 'class': 'form-control',
                 'placeholder': 'Select country',
             })
-        } 
+        }
 
 
 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core',
     'user',
     'django_summernote',
+    'embed_video'
 ]
 
 MIDDLEWARE = [

@@ -463,9 +463,11 @@ class AdminHighlightCreateView(AdminRequiredMixin, CreateView):
     success_message = "Match highlight added successfully!"
 
     def form_invalid(self, form):
+        print("admin highlight create form is not valid.........")
         return super().form_invalid(form)
     
     def form_valid(self, form):
+        print("admin highlight create form is valid.........")
         response = super().form_valid(form)
         self.get_success_message()
         return response
@@ -495,9 +497,9 @@ class AdminHighlightUpdateView(AdminRequiredMixin, UpdateView):
 
 class AdminHighlightDeleteView(AdminRequiredMixin, DeleteView):
     template_name = "siteadmin/highlightdelete.html"
-    model = Player
+    model = Highlight
     success_url = reverse_lazy('core:admin_highlight')
-    success_message = " match highlight deleted successfully!"
+    success_message = "Match highlight deleted successfully!"
     
     def form_valid(self, form):
         self.object = self.get_object()
@@ -527,11 +529,9 @@ class AdminFixtureCreateView(AdminRequiredMixin, CreateView):
     success_message = "Match fixture added successfully!"
 
     def form_invalid(self, form):
-        print("Form is invalid...............................")
         return super().form_invalid(form)
     
     def form_valid(self, form):
-        print("Form is valid...................................")
         response = super().form_valid(form)
         self.get_success_message()
         return response
