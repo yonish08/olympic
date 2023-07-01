@@ -631,10 +631,24 @@ class NewsView(UserRequiredMixin, TemplateView):
     template_name = 'client/news.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news_list'] = News.objects.all().order_by('-created_at')[:20]
+        return context
+
 
 class NewsDetailView(UserRequiredMixin, TemplateView):
     template_name = 'client/newsdetail.html'
     login_url = 'user:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        blogobj = News.objects.get(slug = self.kwargs['slug'])
+        blogobj.views += 1
+        blogobj.save()
+        context['blogdetail'] = blogobj
+        return context
+    
 
 
 class PlayerView(UserRequiredMixin, TemplateView):

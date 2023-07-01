@@ -59,7 +59,7 @@ urlpatterns = [
     path('highlight', HightlightView.as_view(), name='highlight'),
     path('live', LiveView.as_view(), name='live'),
     path('news', NewsView.as_view(), name='news'),
-    path('news-detail', NewsDetailView.as_view(), name='news_detail'),
+    path('news-detail/<slug:slug>/', NewsDetailView.as_view(), name='news_detail'),
     path('player', PlayerView.as_view(), name='player'),
     path('sport', SportView.as_view(), name='sport'),
     # Search

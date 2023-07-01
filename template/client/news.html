@@ -15,54 +15,30 @@ News
     </div>
 
     <div class="news_container__card">
-        <div class="news_wrapper">
-            <div class="news_wrapper_img">
-                <img src="./img/news.PNG" alt="">
+        {% if news_list %}
+            {% for data in news_list %}
+            <div class="news_wrapper">
+                <div class="news_wrapper_img">
+                    {% if data.image %}
+                    <img class="attachment-img" src="{{data.image.url}}" alt="{{data.title}}">
+                    {% endif %}
+                </div>
+                <div class="news_wrapper_desc">
+                    <h4>{{data.title}}</h4>
+                    <p class="date">{{data.timestamp_pretty}}</p>
+                    <p class="desc">
+                        {{data.content|safe|truncatechars:400}}
+                    </p>
+                    <a href="{{data.get_absoulate_url}}">
+                        Read more
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
-            <div class="news_wrapper_desc">
-                <h4>This is news heading</h4>
-                <p class="date">5 APRIL, 2023 FRIDAY</p>
-                <p class="desc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis voluptates deleniti voluptatibus, facere labore necessitatibus!
-                </p>
-                <a href="newsdetail.html">
-                    Read more
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-        <div class="news_wrapper">
-            <div class="news_wrapper_img">
-                <img src="./img/news.PNG" alt="">
-            </div>
-            <div class="news_wrapper_desc">
-                <h4>This is news heading</h4>
-                <p class="date">5 APRIL, 2023 FRIDAY</p>
-                <p class="desc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis voluptates deleniti voluptatibus, facere labore necessitatibus!
-                </p>
-                <a href="newsdetail.html">
-                    Read more
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-        <div class="news_wrapper">
-            <div class="news_wrapper_img">
-                <img src="./img/news.PNG" alt="">
-            </div>
-            <div class="news_wrapper_desc">
-                <h4>This is news heading</h4>
-                <p class="date">5 APRIL, 2023 FRIDAY</p>
-                <p class="desc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis voluptates deleniti voluptatibus, facere labore necessitatibus!
-                </p>
-                <a href="newsdetail.html">
-                    Read more
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
+            {% endfor %}
+        {% else %}
+            <p>No Data Available</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

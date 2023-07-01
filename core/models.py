@@ -55,7 +55,7 @@ class News(TimeStamp):
         verbose_name_plural = "News"
 
     def timestamp_pretty(self):
-        return self.timestamp.strftime('%b %e, %Y')
+        return self.created_at.strftime('%b %e, %Y')
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -65,10 +65,10 @@ class News(TimeStamp):
     def __str__(self):
         return self.title
 
-    # def get_absoulate_url(self):
-    #     return reverse('core:blog-detail',kwargs ={
-    #         'slug':self.slug
-    #     })
+    def get_absoulate_url(self):
+        return reverse('core:news_detail',kwargs ={
+            'slug':self.slug
+        })
 
 
 # country model
