@@ -604,10 +604,6 @@ class AboutusView(UserRequiredMixin, TemplateView):
     template_name = 'client/aboutus.html'
     login_url = 'user:login'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['org'] = AboutFunOlympic.objects.first()
-        return context
 
 
 class FixtureView(UserRequiredMixin, TemplateView):
