@@ -277,16 +277,19 @@ input {
   display: flex;
   justify-content: center;
 }
-.custom_pagination .pagination .page-item{
+
+.custom_pagination .pagination .page-item {
   color: #1f1f1f !important;
 }
-.custom_pagination .pagination .page-item.active .page-link{
+
+.custom_pagination .pagination .page-item.active .page-link {
   background-color: #1f2937 !important;
   border: 1px solid #1f2937 !important;
   color: white !important;
   outline: none !important;
 }
-.custom_pagination .pagination .page-item.active .page-link:hover{
+
+.custom_pagination .pagination .page-item.active .page-link:hover {
   background-color: none !important;
 }
 
@@ -873,7 +876,7 @@ NEWS PAGE CSS START
   min-width: 300px;
 }
 
-.search_breadcrumb a{
+.search_breadcrumb a {
   position: absolute;
   margin-top: -3% !important;
 }

@@ -14,11 +14,17 @@ from django.core.paginator import Paginator, EmptyPage
 # ADMIN SITE VIEW
 # admin dashboard
 class AdminDashboardView(AdminRequiredMixin, TemplateView):
-    template_name = 'siteadmin/base.html'
+    template_name = 'siteadmin/dashboard.html'
     login_url = 'user:login'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['newsCount'] = News.objects.count()
+        context['countryCount'] = Country.objects.count()
+        context['sportCount'] = Sport.objects.count()
+        context['playerCount'] = Player.objects.count()
+        context['highlightCount'] = Highlight.objects.count()
+        context['liveCount'] = LiveMatch.objects.count()
         return context
 
 
