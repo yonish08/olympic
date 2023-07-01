@@ -1,5 +1,6 @@
 {% extends 'client/base.html' %}
 {% load static %}
+{% load embed_video_tags %}
 {% block styles %}
 {% endblock %}
 {% block content %}
@@ -11,21 +12,15 @@
             </div>
             <div class="dashboard_body__box_body">
                 <ul class="">
+                    {% if top_news %}
+                    {% for data in top_news %}
                     <li>
-                        Madrid fle hate crime complaint over vinicious abuse
+                        {{data.title}}
                     </li>
-                    <li>
-                        Madrid fle hate crime complaint over vinicious abuse
-                    </li>
-                    <li>
-                        Madrid fle hate crime complaint over vinicious abuse
-                    </li>
-                    <li>
-                        Madrid fle hate crime complaint over vinicious abuse
-                    </li>
-                    <li>
-                        Madrid fle hate crime complaint over vinicious abuse
-                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <p>No Data Available</p>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -96,15 +91,13 @@
                 </p>
 
                 <div class="video_wrapper">
-                    <iframe 
-                        class="video"
-                        width="100%" 
-                        height="100%" 
-                        src="https://www.youtube.com/embed/JQlbYFbRE6Y" 
-                        title="YouTube video player" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
+                    {% if highlight %}
+                    {% for data in highlight %}
+                    {% video data.video '310x200' %}
+                    {% endfor %}
+                    {% else %}
+                    <p>No Data Available</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -116,43 +109,33 @@
                 <a href="highlights.html">View All</a>
             </div>
             <div class="dashboard_body__box_body">
-                <iframe 
-                    width="100%" 
-                    height="250" 
-                    src="https://www.youtube.com/embed/YRbhZYmEbUM" 
-                    title="YouTube video player" frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen 
-                ></iframe>
+                {% if highlight %}
+                {% for data in highlight %}
+                {% video data.video '310x250' %}
+                {% endfor %}
+                {% else %}
+                <p>No Data Available</p>
+                {% endif %}
             </div>
         </div>
         <div class="dashboard_body__box">
             <div class="dashboard_body__box_header">
                 <h3>Fixtures</h3>
-                <a href="fixtures.html">View All</a>
+                <a href="{% url 'core:fixture' %}">View All</a>
             </div>
             <div class="dashboard_body__box_body fixtures">
                 <ul style>
+                    {% if fixtures %}
+                    {% for data in fixtures %}
                     <li>
-                        <span class="team_name">Team 1</span>
+                        <span class="team_name">{{data.first_participant}}</span>
                         <span>vs</span>
-                        <span class="team_name">Team 2</span>
+                        <span class="team_name">{{ data.second_participant }}</span>
                     </li>
-                    <li>
-                        <span class="team_name">Team 3</span>
-                        <span>vs</span>
-                        <span class="team_name">Team 4</span>
-                    </li>
-                    <li>
-                        <span class="team_name">Team 5</span>
-                        <span>vs</span>
-                        <span class="team_name">Team 6</span>
-                    </li>
-                    <li>
-                        <span class="team_name">Team 7</span>
-                        <span>vs</span>
-                        <span class="team_name">Team 8</span>
-                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <p>No Data Available</p>
+                    {% endif %}
                 </ul>
             </div>
         </div>

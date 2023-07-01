@@ -493,11 +493,12 @@ BASIC COMMON CSS END HERE
 /*********************************dashboard page css start *********************************************************/
 .header_one {
   width: 100%;
-  z-index: 3;
+  z-index: 7;
   position: sticky !important;
   position: -webkit-sticky !important;
   top: 0 !important;
   box-shadow: 0 4px 10px rgba(106, 106, 106, 0.1215686275);
+  background-color: white;
 }
 
 .header_one ul {
@@ -1163,7 +1164,7 @@ OLYMPIC PAGE CSS START
   width: 100%;
   height: auto;
   min-height: 100vh !important;
-  background: url("../img/olympic.PNG") no-repeat;
+  background: url("../img/olympic.PNG") no-repeat !important;
   background-size: auto 100%;
   position: relative;
 }

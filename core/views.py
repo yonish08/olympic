@@ -7,7 +7,7 @@ from django.urls import reverse_lazy, reverse
 from core.models import *
 from core.forms import *
 from django.db.models import Q
-from django.core.paginator import Paginator, EmptyPage
+from django.core.paginator import Paginator
 from itertools import groupby
 
 
@@ -27,7 +27,6 @@ class AdminDashboardView(AdminRequiredMixin, TemplateView):
         context['highlightCount'] = Highlight.objects.count()
         context['liveCount'] = LiveMatch.objects.count()
         return context
-
 
 
 # About us CRUD
@@ -585,16 +584,30 @@ class AdminFixtureDeleteView(AdminRequiredMixin, DeleteView):
         return super().form_valid(form)
     
 
+
 # CLIENT SITE VIEW
 # dashboard
 class DashboardView(UserRequiredMixin, TemplateView):
     template_name = 'client/dashboard.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['top_news'] = News.objects.order_by('-views')[:5]
+        context['highlight'] = Highlight.objects.order_by('-created_at')[:1]
+        context['fixtures'] = Fixture.objects.order_by('-created_at')[:4]
+        context['live'] = LiveMatch.objects.order_by('-created_at')[:3]
+        return context
+
 
 class AboutusView(UserRequiredMixin, TemplateView):
     template_name = 'client/aboutus.html'
     login_url = 'user:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['org'] = AboutFunOlympic.objects.first()
+        return context
 
 
 class FixtureView(UserRequiredMixin, TemplateView):
