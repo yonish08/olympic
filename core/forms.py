@@ -34,6 +34,10 @@ class AboutFunOlympicForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter instagram link',
             }),
+            'twitter_link': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter twitter link',
+            }),
             'youtube_link': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Enter youtube link',

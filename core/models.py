@@ -30,6 +30,7 @@ class AboutFunOlympic(TimeStamp):
     fb_link             = models.CharField(max_length=200,blank=True,null=True)
     instagram_link      = models.CharField(max_length=200,blank=True,null=True)
     youtube_link        = models.CharField(max_length=200,blank=True,null=True)
+    twitter_link        = models.CharField(max_length=200,blank=True,null=True)
 
     def __str__(self):
         return self.title
