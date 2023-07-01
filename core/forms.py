@@ -11,24 +11,31 @@ class AboutFunOlympicForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'title': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter title',
             }),
             'content': forms.Textarea(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter something about page',
             }),
             'address': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter address',
             }),
             'logo': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Select logo',
             }),
             'fb_link': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter facebook link',
             }),
             'instagram_link': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter instagram link',
             }),
             'youtube_link': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Enter youtube link',
             }),
         }

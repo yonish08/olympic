@@ -1,0 +1,70 @@
+{% extends 'siteadmin/base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">About us</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'core:admin_about_us' %}">About us</a></li>
+                        <li class="breadcrumb-item active">update</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <span class="text-danger py-2">Required fileds are *</span>
+            <br>
+            <form action="" method="POST" novalidate enctype="multipart/form-data" class="pb-3">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Title <span class="text-danger">*</span></label>
+                    {{form.title}}
+                </div>
+                <div class="form-group">
+                    <label>Description <span class="text-danger">*</span></label>
+                    <br>
+                    {{form.content}}
+                </div>
+                <div class="form-group">
+                    <label>Addres</label>
+                    <br>
+                    {{form.address}}
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label>Instagram</label>
+                        <br>
+                        {{form.instagram_link}}
+                    </div>
+                    <div class="col-6">
+                        <label>Facebook link</label>
+                        <br>
+                        {{form.fb_link}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label>Youtube</label>
+                        <br>
+                        {{form.youtube_link}}
+                    </div>
+                    <div class="col-6">
+                        <label>Logo</label>
+                        <br>
+                        {{form.logo}}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary ">Submit</button>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -5,7 +5,11 @@ app_name = 'core'
 
 urlpatterns = [
     path('admin-dashboard/', AdminDashboardView.as_view(), name='admin-dashboard'),
+    # About fun olympic CRUD
     path('admin-about-us/', AdminAboutusView.as_view(), name='admin_about_us'),
+    path('admin-about-create', AdminAboutusCreateView.as_view(), name='admin_about_create'),
+    path('admin-about-update/<int:pk>/', AboustUsUpdateView.as_view(), name='admin_about_update'),
+    path('admin-about-view/<int:pk>/', AboustUsDetail.as_view(), name='admin_about_view'),
     # sports CRUD
     path('admin-sports/', AdminSportsView.as_view(), name='admin_sports'),
     path('admin-sport-create', AdminSportsCreateView.as_view(), name='admin_sport_create'),

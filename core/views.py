@@ -28,9 +28,14 @@ class AdminAboutusView(AdminRequiredMixin, TemplateView):
     template_name = 'siteadmin/aboutus.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['org'] = AboutFunOlympic.objects.first()
+        return context
+
 
 class AdminAboutusCreateView(AdminRequiredMixin, CreateView):
-    template_name  = 'siteadmin/member_create.html'
+    template_name  = 'siteadmin/aboutcreate.html'
     form_class = AboutFunOlympicForm
     success_url = reverse_lazy('core:admin_about_us')
     success_message = "About us created successfully!"
@@ -41,7 +46,7 @@ class AdminAboutusCreateView(AdminRequiredMixin, CreateView):
 
 
 class AboustUsUpdateView(AdminRequiredMixin, UpdateView):
-    template_name = "admintemplate/aboutus_update.html"
+    template_name = "siteadmin/aboutupdate.html"
     model = AboutFunOlympic
     form_class = AboutFunOlympicForm
     success_url = reverse_lazy('core:admin_about_us')
@@ -54,6 +59,10 @@ class AboustUsUpdateView(AdminRequiredMixin, UpdateView):
         title = cleaned_data['title']
         return title + self.success_message
 
+
+class AboustUsDetail(AdminRequiredMixin, TemplateView):
+    template_name = 'siteadmin/aboutus.html'
+    login_url = 'user:login'
 
 
 # SPORTS CRUD

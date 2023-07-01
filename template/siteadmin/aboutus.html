@@ -1,12 +1,81 @@
 {% extends 'siteadmin/base.html' %}
 {% load static %}
-{% block title %}
-About us
-{% endblock %}
-{% block styles %}
-{% endblock %}
 {% block content %}
-<div class="component_wrapper">
-    <h1>About us page</h1>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">About us</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'core:admin_about_us' %}">About us</a></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            {% if org %}
+            <a href="{% url 'core:admin_about_update' org.id %}" class="btn btn-success btn-sm">
+                <i class="fas fa-edit fa-sm mr-1"></i>
+                Update
+            </a>
+            <div>
+                <h1 style="font-size: 2em; text-align: center;">{{org.title}}</h1>
+
+                <div class="card p-3">
+                    <div class="header">
+                        <h2>Info</h2>
+                    </div>
+                    <div class="body">
+                        <small class="text-muted">About us: </small>
+                        <p>{{org.content|safe}}</p>
+                        <small class="text-muted">Address: </small>
+                        <p>{{org.address}}</p>
+                        <br>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <small class="text-muted">Facebook link: </small>
+                            <p>{{org.fb_link}}</p>
+                            <br>
+                            <small class="text-muted">Instagram link: </small>
+                            <p>{{org.instagram_link}}</p>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">Youtube link: </small>
+                            <p>{{org.youtube_link}}</p>
+                            <br>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            {% if org.logo %}
+                            <small class="text-muted">Logo: </small>
+                            <img src="{{org.logo.url}}" class="rounded-circle" alt="{{org.title}}"
+                            style="width: 100%; height: 100px; object-fit: contain; float:right;" />
+                            <br>
+                            {% else %}
+                            <small class="text-danger">Please upload logo </small>
+                            <br>
+                            {% endif %}
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <a href="{% url 'core:admin_about_create' %}" class="btn btn-success btn-xs btn_circle">
+                <i class="fa fa-plus text-light" aria-hidden="true"></i>
+            </a>
+            {% endif %}
+        </div>
+    </section>
 </div>
 {% endblock %}
