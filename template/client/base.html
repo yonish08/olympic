@@ -28,6 +28,8 @@
             href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
             rel="stylesheet">
 
+        <script src="https://www.youtube.com/iframe_api"></script>
+
         <!-- font awesome -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
@@ -125,6 +127,55 @@
                 });
             }, 3000);
         </script>
+
+        <script>
+    // Load and initialize the YouTube player
+    function onYouTubeIframeAPIReady() {
+        var videoUrl = 'https://www.youtube.com/watch?v=Jx9ZDKgaboo&ab_channel=FutElite';
+        var videoId = getVideoIdFromUrl(videoUrl);
+        
+        var player = new YT.Player('player', {
+            videoId: videoId,
+            width: 640,
+            height: 360,
+            playerVars: {
+                autoplay: 1,
+                controls: 0,
+                modestbranding: 1,
+                showinfo: 0,
+                loop: 1,
+                playsinline: 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onError': onPlayerError
+            }
+        });
+    }
+
+    // Extract the video ID from the YouTube video URL
+    function getVideoIdFromUrl(url) {
+        var match = url.match(/youtube\.com.*(\?v=|\/embed\/|\/\d\/|\/v\/|\/vi\/|\/e\/|\/user\/[^#]*#([^\/]*\/)*v\/|[^#]*#([^\/]*\/)*v=)([^#\&\?]*).*/i);
+        if (match && match[11].length === 11) {
+            return match[11];
+        } else {
+            // Handle invalid YouTube URL
+            console.error('Invalid YouTube URL');
+            return null;
+        }
+    }
+
+    // Handle YouTube player ready event
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // Handle YouTube player error event
+    function onPlayerError(event) {
+        console.error('YouTube Player Error:', event.data);
+    }
+</script>
+
         <!-- js block -->
         {% block js %}
         {% endblock js %}

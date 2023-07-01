@@ -770,8 +770,3 @@ def highlightSearchView(request):
             return render(request,"client/highlightsearch.html")
     else:
         return render(request,"client/highlightsearch.html")
-
-
-
-
-    
