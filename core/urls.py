@@ -65,4 +65,5 @@ urlpatterns = [
     # Search
     path('player-search/', playerSearchView, name='player_search'),
     path('sport-search/', sportSearchView, name='sport_search'),
+    path('news-search/', newsSearchView, name='news_search'),
 ]

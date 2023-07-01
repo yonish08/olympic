@@ -643,10 +643,12 @@ class NewsDetailView(UserRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        blogobj = News.objects.get(slug = self.kwargs['slug'])
-        blogobj.views += 1
-        blogobj.save()
-        context['blogdetail'] = blogobj
+        news_obj = News.objects.get(slug = self.kwargs['slug'])
+        news_obj.views += 1
+        news_obj.save()
+        context['news_detail'] = news_obj
+        top_news = News.objects.order_by('-views')[:4]
+        context['top_news'] = top_news
         return context
     
 
@@ -712,6 +714,27 @@ def sportSearchView(request):
             return render(request,"client/sportsearch.html")
     else:
         return render(request,"client/sportsearch.html")
+    
+
+# search news
+def newsSearchView(request):
+    if request.method == 'GET':
+        if request.GET['search']:        
+            query =  request.GET.get('search')
+            try:
+                program_lookups = Q(title__icontains=query)
+                news_filter = News.objects.filter(program_lookups) 
+                context = {
+                    'newsFilter' : news_filter,
+                } 
+                return render(request,"client/newssearch.html",context)
+            except:
+                pass
+            return render(request,"client/newssearch.html")
+        else:
+            return render(request,"client/newssearch.html")
+    else:
+        return render(request,"client/newssearch.html")
 
 
 
