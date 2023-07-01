@@ -9,7 +9,13 @@ Highlight
 {% block content %}
 <div class="news_container wrapper">
     <div class="breadcrumb">
-        <h1>Match Highlight</h1>
+        <div class="search_breadcrumb">
+            <h1 style="font-style: italic;">
+                Highlight
+            </h1>
+            <br>
+            <a href="{% url 'core:highlight'%}" class="text-dark"><-- Back</a>
+        </div>
         <form action="{% url 'core:highlight_search' %}">
             <input type="text" placeholder="Search match highlight" name="search">
             <button class="button" type="submit" hidden></button>
@@ -17,8 +23,8 @@ Highlight
     </div>
 
     <div class="news_container__card">
-        {% if highlight %}
-        {% for data in highlight %}
+        {% if highlightFilter %}
+        {% for data in highlightFilter %}
         <div class="news_wrapper">
             <div class="news_wrapper_img">
                 {% video data.video '370x270' %}

@@ -634,6 +634,11 @@ class HightlightView(UserRequiredMixin, TemplateView):
     template_name = 'client/highlight.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['highlight'] = Highlight.objects.order_by('-created_at')[:12]
+        return context
+
 
 class LiveView(UserRequiredMixin, TemplateView):
     template_name = 'client/live.html'
@@ -748,6 +753,27 @@ def newsSearchView(request):
             return render(request,"client/newssearch.html")
     else:
         return render(request,"client/newssearch.html")
+    
+
+# match highlight news
+def highlightSearchView(request):
+    if request.method == 'GET':
+        if request.GET['search']:        
+            query =  request.GET.get('search')
+            try:
+                program_lookups = Q(title__icontains=query)
+                highlight_filter = Highlight.objects.filter(program_lookups) 
+                context = {
+                    'highlightFilter' : highlight_filter,
+                } 
+                return render(request,"client/highlightsearch.html",context)
+            except:
+                pass
+            return render(request,"client/highlightsearch.html")
+        else:
+            return render(request,"client/highlightsearch.html")
+    else:
+        return render(request,"client/highlightsearch.html")
 
 
 
