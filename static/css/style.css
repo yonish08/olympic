@@ -1293,6 +1293,7 @@ FIXTURES PAGE CSS START
 
 .fixtures_container .fixtures_wrapper ul li {
   margin-top: 8px;
+  margin-bottom: 8px;
   font-family: "Roboto";
   font-style: normal;
   color: var(--text_dark);

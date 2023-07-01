@@ -8,6 +8,7 @@ from core.models import *
 from core.forms import *
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage
+from itertools import groupby
 
 
 # Create your views here.
@@ -478,11 +479,9 @@ class AdminHighlightCreateView(AdminRequiredMixin, CreateView):
     success_message = "Match highlight added successfully!"
 
     def form_invalid(self, form):
-        print("admin highlight create form is not valid.........")
         return super().form_invalid(form)
     
     def form_valid(self, form):
-        print("admin highlight create form is valid.........")
         response = super().form_valid(form)
         self.get_success_message()
         return response
@@ -601,6 +600,21 @@ class AboutusView(UserRequiredMixin, TemplateView):
 class FixtureView(UserRequiredMixin, TemplateView):
     template_name = 'client/fixtures.html'
     login_url = 'user:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        fixtures = Fixture.objects.all().order_by('-created_at')[:50]
+        grouped_fixtures = groupby(fixtures, key=lambda x: x.sport_category)
+
+        fixture_groups = []
+        for key, group in grouped_fixtures:
+            fixture_groups.append({
+                'sport_category': key,
+                'fixtures': list(group)
+            })
+
+        context['fixture_groups'] = fixture_groups
+        return context
 
 
 class HightlightView(UserRequiredMixin, TemplateView):

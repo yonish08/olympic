@@ -12,28 +12,38 @@ Fixture
     </div>
 
     <div class="fixtures_wrapper">
-        <ul style>
-            <li>
-                <span class="team_name">Team 1</span>
+        {% if fixture_groups %}
+        {% for group in fixture_groups %}
+        <h4 style="margin: 0; padding: 0;">{{ group.sport_category }}</h4>
+        <ul>
+            {% for fixture in group.fixtures %}
+            <p style="margin: 0px; padding: 0px;">
+                <span 
+                    style="font-weight: 500;
+                    font-size: 0.875rem;
+                    line-height: 154%;
+                    text-align: center;">
+                    {{fixture.venue_name}},
+                </span>
+                <span style="font-weight: 400;
+                        font-size: 0.875rem;
+                        line-height: 154%;
+                        text-align: center;
+                        color: #b8b7b7;"> 
+                        {{fixture.date}}
+                </span>
+            </p>
+            <li style="margin-bottom: 10px !important;">
+                <span class="team_name">{{ fixture.first_participant }}</span>
                 <span>vs</span>
-                <span class="team_name">Team 2</span>
+                <span class="team_name">{{ fixture.second_participant }}</span>
             </li>
-            <li>
-                <span class="team_name">Team 3</span>
-                <span>vs</span>
-                <span class="team_name">Team 4</span>
-            </li>
-            <li>
-                <span class="team_name">Team 5</span>
-                <span>vs</span>
-                <span class="team_name">Team 6</span>
-            </li>
-            <li>
-                <span class="team_name">Team 7</span>
-                <span>vs</span>
-                <span class="team_name">Team 8</span>
-            </li>
+            {% endfor %}
         </ul>
+        {% endfor %}
+        {% else %}
+        <p>No Data Available</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
