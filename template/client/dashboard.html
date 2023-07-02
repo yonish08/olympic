@@ -49,6 +49,8 @@
         </div>
     </div>
     <div class="dashboard_body__middle">
+        {% if live %}
+        {% for data in live %}
         <div class="live_box">
             <div class="live_box__header">
                 <p class="text-danger">
@@ -59,47 +61,17 @@
             </div>
             <div class="live_box__body">
                 <p>
-                    <span class="team_name">
-                        Brazil 
-                        &nbsp;&nbsp;  <span>2</span>
-                    </span>
-                    <span>HT</span>
-                    <span class="team_name">
-                        <span>2</span> &nbsp;&nbsp;  
-                        France 
-                    </span>
+                    {{data.title}}
                 </p>
-
                 <div class="video_wrapper">
-                    <div id="player"></div>
+                    {% video data.video_url  %}
                 </div>
             </div>
         </div>
-
-        <div class="live_box">
-            <div class="live_box__header">
-                <p class="text-danger">
-                    <i class="mr-2 fa-solid fa-bars-staggered text-danger"></i>
-                    Live
-                </p>
-                <a href="live.html" class="view_detail">View Live</a>
-            </div>
-            <div class="live_box__body">
-                <p>
-                    Gaurika singh almost win another gold
-                </p>
-
-                <div class="video_wrapper">
-                    {% if highlight %}
-                    {% for data in highlight %}
-                    {% video data.video  %}
-                    {% endfor %}
-                    {% else %}
-                    <p>No Data Available</p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+        {% endfor %}
+        {% else %}
+            <p>No Data Available</p>
+        {% endif %}
     </div>
     <div class="dashboard_body__right">
         <div class="dashboard_body__box">
@@ -108,13 +80,45 @@
                 <a href="{% url 'core:highlight' %}">View All</a>
             </div>
             <div class="dashboard_body__box_body">
-                {% if highlight %}
+                <!-- {% if highlight %}
                 {% for data in highlight %}
                 {% video data.video '310x250' %}
                 {% endfor %}
                 {% else %}
                 <p>No Data Available</p>
+                {% endif %} -->
+
+                {% if highlight %}
+                    {% for data in highlight %}
+                        <div id="player"></div>
+
+                        <script>
+                        // Load the YouTube Player API asynchronously
+                        var tag = document.createElement('script');
+                        tag.src = "https://www.youtube.com/player_api";
+                        var firstScriptTag = document.getElementsByTagName('script')[0];
+                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                        // Function called when YouTube Player API is ready
+                        function onYouTubePlayerAPIReady() {
+                            // Create a new YouTube player inside the 'player' container
+                            var player = new YT.Player('player', {
+                            videoId: '{{ data.video }}',
+                            width: '310',
+                            height: '250',
+                            playerVars: {
+                                controls: 0,  // Hide video controls
+                                modestbranding: 1  // Hide YouTube logo
+                            }
+                            });
+                        }
+                        </script>
+                    {% endfor %}
+                    {% else %}
+                    <p>No Data Available</p>
                 {% endif %}
+
+
             </div>
         </div>
         <div class="dashboard_body__box">
