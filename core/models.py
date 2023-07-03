@@ -134,14 +134,24 @@ class Highlight(TimeStamp):
 class LiveMatch(TimeStamp):
     sport_category = models.ForeignKey(Sport, on_delete=models.CASCADE,null=True, blank=True)
     title          = models.CharField(max_length=255)
+    slug           = models.SlugField(null=True, blank=True, unique=True)
     description    = models.TextField(null=True, blank=True)
-    video_url      = EmbedVideoField(null=False, blank=False)
+    video_url      = models.FileField(upload_to='videos/live', null=False, blank=False)
     venue_name     = models.CharField(max_length=255, verbose_name="Venue Name")
     country        = models.ManyToManyField(Country, blank=True, verbose_name="Participating Countries")
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title, allow_unicode=True)
+        return super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
-    
+
+    def get_absoulate_url(self):
+        return reverse('core:live',kwargs ={
+            'slug':self.slug
+        })
 
 # game fixtures
 class Fixture(TimeStamp):

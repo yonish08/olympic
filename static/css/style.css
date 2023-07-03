@@ -293,6 +293,11 @@ input {
   background-color: none !important;
 }
 
+.youtube_player #player .ytp-chrome-top{
+  background-color: red !important;
+  display: none !important;
+}
+
 /*
 BASIC COMMON CSS END HERE
 */

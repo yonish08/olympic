@@ -205,7 +205,7 @@ class LiveMatchForm(forms.ModelForm):
 					'height': '350px',
                     }
 			}),
-            'video_url': forms.TextInput(attrs={
+            'video_url': forms.ClearableFileInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Enter video url',
             }),

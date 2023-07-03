@@ -69,8 +69,21 @@
             .custom_pagination .pagination .page-item.active .page-link:hover{
                 background-color: none !important;
             }
+            .youtube_player {
+                pointer-events: none;
+            }
+
+            .ytp-chrome-top .ytp-show-cards-title{
+                display: none !important;
+            }
+
+
         </style>
         {% endblock %}
+
+        {% block js %}
+        {% endblock %}
+
     </head>
 
     <body>
@@ -129,10 +142,6 @@
             }, 3000);
         </script>
 
-
-        <!-- js block -->
-        {% block js %}
-        {% endblock js %}
     </body>
 
 </html>

@@ -640,6 +640,13 @@ class LiveView(UserRequiredMixin, TemplateView):
     template_name = 'client/live.html'
     login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['highlight'] = LiveMatch.objects.order_by('-created_at')[:7]
+        live_obj = LiveMatch.objects.get(slug = self.kwargs['slug'])
+        context['live_detail'] = live_obj
+        return context
+
 
 class NewsView(UserRequiredMixin, TemplateView):
     template_name = 'client/news.html'

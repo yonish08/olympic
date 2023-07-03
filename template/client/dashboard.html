@@ -3,6 +3,8 @@
 {% load embed_video_tags %}
 {% block styles %}
 {% endblock %}
+{% block js %}
+{% endblock %}
 {% block content %}
 <div class="dashboard_body wrapper">
     <div class="dashboard_body__left">
@@ -11,7 +13,7 @@
                 <h3>Top Headlines</h3>
             </div>
             <div class="dashboard_body__box_body">
-                <ul class="">
+                <ul class>
                     {% if top_news %}
                     {% for data in top_news %}
                     <li>
@@ -50,25 +52,25 @@
     </div>
     <div class="dashboard_body__middle">
         {% if live %}
-        {% for data in live %}
-        <div class="live_box">
-            <div class="live_box__header">
-                <p class="text-danger">
-                    <i class="mr-2 fa-solid fa-bars-staggered text-danger"></i>
-                    Live
-                </p>
-                <a href="" class="view_detail">View Live</a>
-            </div>
-            <div class="live_box__body">
-                <p>
-                    {{data.title}}
-                </p>
-                <div class="video_wrapper">
-                    {% video data.video_url  %}
+            {% for data in live %}
+                <div class="live_box">
+                    <div class="live_box__header">
+                        <p class="text-danger">
+                            <i class="mr-2 fa-solid fa-bars-staggered text-danger"></i>
+                            Live
+                        </p>
+                        <a href="{{data.get_absoulate_url}}" class="view_detail">View Live</a>
+                    </div>
+                    <div class="live_box__body">
+                        <h6>{{data.title}}</h6>
+                        <div class="video_wrapper">
+                            <video class="video-fluid" width="600" height="360" controls="controls">
+                                <source src="{{ data.video_url.url }}" type="video/mp4" />
+                            </video>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
         {% else %}
             <p>No Data Available</p>
         {% endif %}
@@ -80,45 +82,13 @@
                 <a href="{% url 'core:highlight' %}">View All</a>
             </div>
             <div class="dashboard_body__box_body">
-                <!-- {% if highlight %}
+                {% if highlight %}
                 {% for data in highlight %}
-                {% video data.video '310x250' %}
+                {% video data.video '310x240' %}
                 {% endfor %}
                 {% else %}
                 <p>No Data Available</p>
-                {% endif %} -->
-
-                {% if highlight %}
-                    {% for data in highlight %}
-                        <div id="player"></div>
-
-                        <script>
-                        // Load the YouTube Player API asynchronously
-                        var tag = document.createElement('script');
-                        tag.src = "https://www.youtube.com/player_api";
-                        var firstScriptTag = document.getElementsByTagName('script')[0];
-                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-                        // Function called when YouTube Player API is ready
-                        function onYouTubePlayerAPIReady() {
-                            // Create a new YouTube player inside the 'player' container
-                            var player = new YT.Player('player', {
-                            videoId: '{{ data.video }}',
-                            width: '310',
-                            height: '250',
-                            playerVars: {
-                                controls: 0,  // Hide video controls
-                                modestbranding: 1  // Hide YouTube logo
-                            }
-                            });
-                        }
-                        </script>
-                    {% endfor %}
-                    {% else %}
-                    <p>No Data Available</p>
                 {% endif %}
-
-
             </div>
         </div>
         <div class="dashboard_body__box">
