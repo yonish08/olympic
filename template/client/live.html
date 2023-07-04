@@ -46,10 +46,13 @@ Live
                         </div>
                         {% endfor %}
                     </div>
-                    <form novalidate id="form" action="{% url 'core:live_comment' live_detail.slug %}">
+                    <form novalidate id="form"
+                        action="{% url 'core:live_comment' live_detail.slug %}">
                         <div class="form-group">
-                            <input type="text" hidden id="name" name="name" value="{{ full_name }}">
-                            <input type="email" hidden id="email" name="email" value="{{ user_email }}">
+                            <input type="text" hidden id="name" name="name"
+                                value="{{ full_name }}">
+                            <input type="email" hidden id="email" name="email"
+                                value="{{ user_email }}">
                             <textarea class="form-control" rows="2"
                                 id="comment" name="comment"></textarea>
                         </div>
@@ -66,8 +69,8 @@ Live
 {% endblock %}
 {% block js %}
 <script>
-    $(document).ready(function (e) {
-    $("body").on('submit', "#form", function (e) {
+    $(document).ready(function() {
+    $("body").on('submit', "#form", function(e) {
         e.preventDefault();
 
         var form = $(this);
@@ -90,11 +93,18 @@ Live
             url: form.attr('action'),
             data: commentData,
 
-            success: function (data) {
+            success: function(data) {
                 if (data.status == 'ok') {
                     commentInput.val('');
-                    var commentElement = '<p>' + commentData.text + '</p>';
-                    form.prevAll('p').last().after(commentElement);
+                    var commentElement = '<div class="comment_wrapper__container">' +
+                        '<h6>' + commentData.name + '</h6>' +
+                        '<p style="font-size: 14px; padding: 0; margin: 0;">' + commentData.text + '</p>' +
+                        '<small style="color: #b8b7b7;">Just now</small>' +
+                        '</div>';
+                    $('.comment_wrapper').append(commentElement);
+                    // Auto-scroll to the most recent comment
+                    var commentWrapper = document.querySelector('.comment_wrapper');
+                    commentWrapper.scrollTop = commentWrapper.scrollHeight;
                 } else if (data.status == 'error') {
                     e.preventDefault();
                 }
@@ -102,6 +112,5 @@ Live
         });
     });
 });
-
 </script>
 {% endblock %}
