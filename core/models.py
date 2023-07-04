@@ -152,6 +152,11 @@ class LiveMatch(TimeStamp):
         return reverse('core:live',kwargs ={
             'slug':self.slug
         })
+    
+    def get_absoulate_admin_url(self):
+        return reverse('core:admin_live_detail',kwargs ={
+            'slug':self.slug
+        })
 
 
 class LiveComment(TimeStamp):

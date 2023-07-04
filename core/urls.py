@@ -40,6 +40,8 @@ urlpatterns = [
     path('admin-live-create', AdminLiveCreateView.as_view(), name='admin_live_create'),
     path('admin-live-update/<int:pk>/', AdminLiveUpdateView.as_view(), name='admin_live_update'),
     path('admin-live-delete/<int:pk>/', AdminLiveDeleteView.as_view(), name='admin_live_delete'),
+    path('admin-live-detail/<slug:slug>/', AdminLiveDetailView.as_view(), name='admin_live_detail'),
+    path('admin-live-comment-delete/<int:pk>/', AdminLiveCommentDeleteView.as_view(), name='admin_live_comment_delete'),
     # Highlight CRUD
     path('admin-highlight/', AdminHighlightView.as_view(), name='admin_highlight'),
     path('admin-highlight-create', AdminHighlightCreateView.as_view(), name='admin_highlight_create'),

@@ -455,6 +455,32 @@ class AdminLiveDeleteView(AdminRequiredMixin, DeleteView):
         self.object = self.get_object()
         messages.success(self.request, self.success_message)
         return super().form_valid(form)
+    
+
+class AdminLiveDetailView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/livedetail.html"
+    model = LiveMatch
+    success_url = reverse_lazy('core:admin_live')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        live_obj = LiveMatch.objects.get(slug = self.kwargs['slug'])
+        context['live_detail'] = live_obj
+        print("live_detail= ", live_obj)
+        context["comments"] = LiveComment.objects.filter(match=live_obj)
+        return context
+    
+
+class AdminLiveCommentDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = "siteadmin/livecommentdelete.html"
+    model = LiveComment
+    success_url = reverse_lazy('core:admin_live')
+    success_message = "Comment deleted successfully!"
+    
+    def form_valid(self, form):
+        self.object = self.get_object()
+        messages.success(self.request, self.success_message)
+        return super().form_valid(form)
 
 
 # Highlight live
