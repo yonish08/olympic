@@ -10,8 +10,10 @@ Live
     <div class="live_detail__body">
         <div class="live_detail__body_left">
             <div class="live_detail__body_video">
-                <video class="video-fluid" width="900" height="500" controls="controls">
-                    <source src="{{ live_detail.video_url.url }}" type="video/mp4" />
+                <video class="video-fluid" width="900" height="500"
+                    controls="controls">
+                    <source src="{{ live_detail.video_url.url }}"
+                        type="video/mp4" />
                 </video>
             </div>
             <h1 class="mt-3">
@@ -20,21 +22,86 @@ Live
         </div>
         <div class="live_detail__body_right">
             <div class="live_match">
-                <h4>Live matches</h4>
+                <!-- <h4>Live matches</h4>
 
                 {% if highlight %}
-                    {% for data in highlight%}
-                        <div class="live_match__card">
-                            <div class="live_match__desc">
-                                <a class="para_bold" href="{{data.get_absoulate_url}}">{{data.title}}</a>
-                            </div>
-                        </div>
-                    {% endfor %}
+                {% for data in highlight%}
+                <div class="live_match__card">
+                    <div class="live_match__desc">
+                        <a class="para_bold" href="{{data.get_absoulate_url}}">{{data.title}}</a>
+                    </div>
+                </div>
+                {% endfor %}
                 {% else %}
-                    <p>No Data Available</p>
-                {% endif %}
+                <p>No Data Available</p>
+                {% endif %} -->
+
+                <div class="mt-5">
+                    <div class="comment_wrapper">
+                        {% for comment in comments %}
+                        <div class="comment_wrapper__container">
+                            <h6>{{comment.name}}</h6>
+                            <p style="font-size: 14px; padding: 0; margin: 0;">{{comment.comment}}</p>
+                            <small style="color: #b8b7b7;">{{comment.created_at}}</small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <form novalidate id="form" action="{% url 'core:live_comment' live_detail.slug %}">
+                        <div class="form-group">
+                            <input type="text" hidden id="name" name="name" value="{{ full_name }}">
+                            <input type="email" hidden id="email" name="email" value="{{ user_email }}">
+                            <textarea class="form-control" rows="2"
+                                id="comment" name="comment"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn" id="commentSubmit">Post
+                                commnet</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function (e) {
+    $("body").on('submit', "#form", function (e) {
+        e.preventDefault();
+
+        var form = $(this);
+        var commentInput = form.find('#comment');
+        var nameInput = form.find('#name');
+        var emailInput = form.find('#email');
+        var csrfToken = '{{ csrf_token }}';
+
+        var commentData = {
+            text: commentInput.val(),
+            name: nameInput.val(),
+            email: emailInput.val(),
+            csrfmiddlewaretoken: csrfToken
+        };
+
+        console.warn("Comment data is => ", commentData);
+
+        $.ajax({
+            method: 'POST',
+            url: form.attr('action'),
+            data: commentData,
+
+            success: function (data) {
+                if (data.status == 'ok') {
+                    commentInput.val('');
+                    var commentElement = '<p>' + commentData.text + '</p>';
+                    form.prevAll('p').last().after(commentElement);
+                } else if (data.status == 'error') {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+});
+
+</script>
 {% endblock %}

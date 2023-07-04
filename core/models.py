@@ -153,6 +153,15 @@ class LiveMatch(TimeStamp):
             'slug':self.slug
         })
 
+
+class LiveComment(TimeStamp):
+    match      = models.ForeignKey(LiveMatch, on_delete=models.CASCADE)
+    name      = models.CharField(max_length=100, null=True, blank=True)
+    email     = models.EmailField(null=True, blank=True)
+    comment   = models.TextField(max_length=200)
+    def __str__(self):
+        return f"By: ({self.name}) for ({self.match})."
+
 # game fixtures
 class Fixture(TimeStamp):
     first_participant  = models.CharField(max_length=200,verbose_name='Particant Name')

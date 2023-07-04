@@ -9,6 +9,7 @@ from core.forms import *
 from django.db.models import Q
 from django.core.paginator import Paginator
 from itertools import groupby
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -642,10 +643,55 @@ class LiveView(UserRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['highlight'] = LiveMatch.objects.order_by('-created_at')[:7]
+        context['highlight'] = LiveMatch.objects.order_by('-created_at')[:3]
         live_obj = LiveMatch.objects.get(slug = self.kwargs['slug'])
         context['live_detail'] = live_obj
+        context["comments"] = LiveComment.objects.filter(match=live_obj)
+        # Get logged-in user information
+        user = self.request.user
+        context['full_name'] = user.get_full_name()
+        context['user_email'] = user.email
         return context
+
+    def post(self, request, *args, **kwargs):
+        text = self.request.POST['text']
+        name = self.request.POST['name']
+        email = self.request.POST['email']
+        match = LiveMatch.objects.get(slug = self.kwargs['slug'])
+        print(text)
+        print(name)
+        print(email)
+        print(match)
+        if text is not None and text != "":
+            comments  = LiveComment(match=match, comment=text, name=name, email=email)
+            comments.save()
+            return JsonResponse({'status':'ok'})
+        else:
+            return JsonResponse({'status':'error'})
+
+
+class LiveCommentView(View):
+    def post(self, request, *args, **kwargs):
+        text = request.POST.get('text')
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        match_slug = kwargs['slug']
+
+        try:
+            match = LiveMatch.objects.get(slug=match_slug)
+        except LiveMatch.DoesNotExist:
+            return JsonResponse({'status': 'error'})
+
+        if text is not None and text != "":
+            comment = LiveComment.objects.create(
+                match=match,
+                comment=text,
+                name=name,
+                email=email
+            )
+            return JsonResponse({'status': 'ok'})
+        else:
+            return JsonResponse({'status': 'error'})
 
 
 class NewsView(UserRequiredMixin, TemplateView):

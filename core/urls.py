@@ -58,6 +58,7 @@ urlpatterns = [
     path('fixture', FixtureView.as_view(), name='fixture'),
     path('highlight', HightlightView.as_view(), name='highlight'),
     path('live/<slug:slug>/', LiveView.as_view(), name='live'),
+    path('live/<slug:slug>/comment/', LiveCommentView.as_view(), name='live_comment'),
     path('news', NewsView.as_view(), name='news'),
     path('news-detail/<slug:slug>/', NewsDetailView.as_view(), name='news_detail'),
     path('player', PlayerView.as_view(), name='player'),

@@ -293,9 +293,20 @@ input {
   background-color: none !important;
 }
 
-.youtube_player #player .ytp-chrome-top{
-  background-color: red !important;
-  display: none !important;
+.comment_wrapper{
+  height: auto;
+  min-height: 200px !important;
+  max-height: 300px !important;
+  overflow-y: auto;
+  /* background-color: red !important; */
+}
+.comment_wrapper__container {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+.comment_wrapper__container:first-child{
+  margin-top: 0px !important;
 }
 
 /*
@@ -1332,7 +1343,7 @@ LIVE PAGE CSS START
 
 .live_detail .live_detail__body {
   display: grid;
-  grid-template-columns: 2.3fr 0.7fr;
+  grid-template-columns: 2fr 1fr;
   -moz-column-gap: 50px !important;
   column-gap: 50px !important;
 }
