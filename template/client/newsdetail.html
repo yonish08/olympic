@@ -38,7 +38,7 @@ News Detail
                     </div>
                     <div class="other_news__desc">
                         <p class="small_para_regular">{{data.timestamp_pretty}}</p>
-                        <p class="para_bold">{{data.title}}</p>
+                        <a class="para_bold" href="{{data.get_absoulate_news_url}}">{{data.title}}</a>
                     </div>
                 </div>
                 {% endfor %}

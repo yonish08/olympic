@@ -26,10 +26,7 @@ News
                 <div class="news_wrapper_desc">
                     <h4>{{data.title}}</h4>
                     <p class="date">{{data.timestamp_pretty}}</p>
-                    <p class="desc">
-                        {{data.content|safe|truncatechars:400}}
-                    </p>
-                    <a href="{{data.get_absoulate_url}}">
+                    <a href="{{data.get_absoulate_news_url}}">
                         Read more
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>

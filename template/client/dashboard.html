@@ -17,7 +17,9 @@
                     {% if top_news %}
                     {% for data in top_news %}
                     <li>
-                        {{data.title}}
+                        <a href="{{data.get_absoulate_news_url}}">
+                            {{data.title}}
+                        </a>
                     </li>
                     {% endfor %}
                     {% else %}
@@ -64,7 +66,7 @@
                     <div class="live_box__body">
                         <h6>{{data.title}}</h6>
                         <div class="video_wrapper">
-                            <video class="video-fluid" width="600" height="360" controls="controls">
+                            <video class="video-fluid" width="500" height="300" controls="controls">
                                 <source src="{{ data.video_url.url }}" type="video/mp4" />
                             </video>
                         </div>

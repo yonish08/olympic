@@ -66,7 +66,7 @@ class News(TimeStamp):
     def __str__(self):
         return self.title
 
-    def get_absoulate_url(self):
+    def get_absoulate_news_url(self):
         return reverse('core:news_detail',kwargs ={
             'slug':self.slug
         })

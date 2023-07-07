@@ -670,6 +670,10 @@ BASIC COMMON CSS END HERE
   font-size: 0.875rem;
   line-height: 154%;
   cursor: pointer;
+
+}
+.dashboard_body .dashboard_body__box .dashboard_body__box_body ul li a{
+  color: var(--text_dark) !important;
 }
 
 .dashboard_body .dashboard_body__box .dashboard_body__box_body ul li .team_name {
@@ -722,12 +726,14 @@ BASIC COMMON CSS END HERE
 .dashboard_body .dashboard_body__middle {
   height: auto;
   min-height: 300px;
+  overflow: hidden !important;
 }
 
 .dashboard_body .dashboard_body__middle .live_box {
   padding: 15px;
   border: 1px solid var(--text_light_shade_grey);
   border-radius: 4px;
+  overflow: hidden !important;
 }
 
 .dashboard_body .dashboard_body__middle .live_box .live_box__header {
@@ -900,7 +906,7 @@ NEWS PAGE CSS START
 
 .news_container .news_container__card {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 20px;
   -moz-column-gap: 20px;
   column-gap: 20px;
@@ -908,11 +914,14 @@ NEWS PAGE CSS START
 }
 
 .news_container .news_container__card .news_wrapper {
-  background: #ffffff;
+  display: flex; /* Change display to flex */
+  flex-direction: column; /* Display cards in a column */
   box-shadow: 0px 0px 12px rgba(131, 131, 131, 0.16);
   border-radius: 4px;
   padding: 15px;
+  overflow: hidden;
 }
+
 
 .news_container .news_container__card .news_wrapper .news_wrapper_img {
   position: relative;
